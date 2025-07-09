@@ -13,16 +13,7 @@
       --info: #3b82f6; --purple: #8b5cf6; --pink: #ec4899; --cyan: #06b6d4;
       --particle-float-x: 1000px;
       --login-gradient: linear-gradient(135deg, var(--primary), var(--secondary));
-      --social-google: linear-gradient(135deg, #4285F4, #34A853);
-      --social-facebook: linear-gradient(135deg, #1877F2, #24A7FD);
-      --social-github: linear-gradient(135deg, #24292e, #0366d6);
       --input-focus-shadow: 0 0 0 3px rgba(106, 17, 203, 0.4); /* Softer focus glow */
-
-      /* Scaling factors for fitting experience, aiming for ~90% zoom feel */
-      --scale-factor-general: 0.88; /* Apply a general scale factor to many elements */
-      --scale-factor-login-content: 0.85; /* Slightly more for login to feel compact */
-      --scale-factor-fonts: 0.88;
-      --scale-factor-padding: 0.88;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -68,10 +59,10 @@
     @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     .popup-content {
         background: linear-gradient(145deg, var(--darker), #1a233a);
-        padding: 40px 50px; /* Base padding */
+        padding: 40px 50px;
         border-radius: 15px;
         width: 90%;
-        max-width: 450px; /* Default max width */
+        max-width: 400px; /* Reduced max-width for a smaller form */
         box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
         animation: popupFadeIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         border: 1px solid rgba(255, 255, 255, 0.15);
@@ -85,8 +76,8 @@
     @keyframes popupFadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
     .popup-header {
         color: #fff;
-        font-size: 1.9rem;
-        margin-bottom: 30px;
+        font-size: 1.7rem; /* Slightly smaller font */
+        margin-bottom: 25px; /* Reduced margin */
         font-weight: 700;
         display: flex;
         align-items: center;
@@ -96,21 +87,21 @@
     }
     .popup-header i {
         color: var(--accent);
-        font-size: 2.2rem;
+        font-size: 2rem; /* Slightly smaller icon */
     }
     .login-logo {
-        margin-bottom: 30px;
+        margin-bottom: 25px; /* Reduced margin */
     }
     .login-logo img {
-        width: 90px;
-        height: 90px;
-        border-radius: 25px;
+        width: 70px; /* Smaller logo */
+        height: 70px;
+        border-radius: 20px;
         border: 4px solid var(--primary);
         box-shadow: 0 0 20px rgba(106, 17, 203, 0.5);
     }
 
     .input-group {
-        margin-bottom: 25px;
+        margin-bottom: 20px; /* Reduced margin */
         position: relative;
         width: 100%;
     }
@@ -129,7 +120,7 @@
         opacity: 0.8;
     }
     .input-group input:focus + label, .input-group input:not(:placeholder-shown) + label {
-        transform: translateY(-28px) scale(0.75);
+        transform: translateY(-25px) scale(0.75);
         opacity: 1;
         color: var(--primary);
     }
@@ -143,11 +134,11 @@
     }
     .input-group input {
         width: 100%;
-        padding: 15px 15px 15px 55px;
+        padding: 12px 15px 12px 45px; /* Reduced padding */
         background: rgba(0, 0, 0, 0.3);
         border: 1px solid rgba(255, 255, 255, 0.1);
         border-radius: 10px;
-        font-size: 1rem;
+        font-size: 0.95rem; /* Slightly smaller font */
         color: #fff;
         transition: all 0.3s ease;
         outline: none;
@@ -161,13 +152,13 @@
     .checkbox-group {
         display: flex;
         align-items: center;
-        margin-bottom: 25px;
+        margin-bottom: 20px; /* Reduced margin */
         justify-content: flex-start;
     }
     .checkbox-group input[type="checkbox"] {
         margin-right: 12px;
         accent-color: var(--primary);
-        transform: scale(1.2);
+        transform: scale(1.1); /* Slightly smaller checkbox */
         cursor: pointer;
     }
     .checkbox-group label {
@@ -178,16 +169,16 @@
     
     .login-btn, .action-btn {
         width: 100%;
-        padding: 15px;
+        padding: 12px; /* Reduced padding */
         background: var(--login-gradient);
         color: #fff;
         border: none;
         border-radius: 10px;
-        font-size: 1.1rem;
+        font-size: 1rem; /* Slightly smaller font */
         font-weight: 600;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-bottom: 20px;
+        margin-bottom: 15px; /* Reduced margin */
         box-shadow: 0 6px 20px rgba(106, 17, 203, 0.4);
         display: flex;
         align-items: center;
@@ -203,11 +194,9 @@
     .action-btn.danger { background: linear-gradient(135deg, #e53935, #b71c1c); box-shadow: 0 4px 15px rgba(229, 57, 53, 0.3); }
     .action-btn.danger:hover { box-shadow: 0 6px 20px rgba(229, 57, 53, 0.4); }
 
-    /* Removed Social Login Specific CSS */
-
     .forgot-password {
-        margin-top: 25px;
-        margin-bottom: 30px;
+        margin-top: 20px; /* Reduced margin */
+        margin-bottom: 25px; /* Reduced margin */
     }
     .forgot-password a {
         color: var(--accent);
@@ -221,7 +210,7 @@
     }
     .error-message, .success-message, .warning-message {
         font-size: 0.9rem;
-        margin-top: 15px;
+        margin-top: 10px; /* Reduced margin */
         text-align: center;
         display: none;
         padding: 12px 15px;
@@ -231,9 +220,6 @@
         justify-content: center;
         gap: 10px;
     }
-    .error-message { color: #ff6b6b; background-color: rgba(255, 107, 107, 0.1); border: 1px solid rgba(255,107,107,0.3); }
-    .success-message { color: var(--success); background-color: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16,185,129,0.3); }
-    .warning-message { color: var(--warning); background-color: rgba(245, 158, 11, 0.1); border: 1px solid rgba(245,158,11,0.3); }
 
     .login-footer {
         margin-top: 30px;
@@ -485,7 +471,7 @@
       /* Adjustments for mobile to make things feel more compact */
       .popup-content {
         padding: 25px 20px;
-        max-width: 95%;
+        max-width: 95%; /* Make it fit better */
       }
       .popup-header {
         font-size: 1.7rem; /* Slightly smaller for mobile */
@@ -505,14 +491,6 @@
       .checkbox-group { margin-bottom: 20px; }
       .checkbox-group input[type="checkbox"] { transform: scale(1.1); }
       .login-btn, .action-btn { padding: 12px; font-size: 1rem; margin-bottom: 15px; }
-      .social-login-divider { margin: 25px 0; }
-      .social-btn {
-        width: 100%; /* Stack them fully */
-        min-width: auto;
-      }
-      .social-btn:nth-child(3) { /* Ensure third button stacks */
-        width: 100%;
-      }
       .forgot-password { margin-top: 20px; margin-bottom: 25px; }
       .error-message, .success-message, .warning-message { margin-top: 10px; }
 
