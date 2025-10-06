@@ -96,48 +96,22 @@
     .search-bar input:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.4); }
     .search-bar i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: var(--text-muted); font-size: 1rem; }
 
-    /* === BOTONES COLORIDOS === */
+    /* === UNIFIED BUTTON STYLE === */
     .button-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
     .btn {
       display: flex; align-items: center; padding: 15px 20px; color: var(--text-light);
       border: 1px solid transparent; border-radius: 10px;
       text-decoration: none; font-size: 0.95rem; font-weight: 500; cursor: pointer; 
-      transition: all 0.4s ease; background-size: 250% auto;
+      transition: all 0.4s ease; 
+      /* UNIFIED THEME COLOR APPLIED HERE */
+      background-image: linear-gradient(to right, var(--primary) 0%, var(--primary-dark) 51%, var(--primary) 100%);
+      background-size: 250% auto;
     }
     .btn i:first-child { margin-right: 12px; font-size: 1.2rem; min-width: 20px; text-align: center; transition: transform 0.3s ease; }
     .btn .btn-text { flex-grow: 1; }
     .btn:hover { transform: translateY(-4px) scale(1.02); box-shadow: 0 10px 25px rgba(0,0,0,0.3); color: white; background-position: right center; }
     .btn:hover i { transform: rotate(-5deg) scale(1.1); }
     
-    .btn-1 { background-image: linear-gradient(to right, #6a11cb 0%, #2575fc 51%, #6a11cb 100%); }
-    .btn-2 { background-image: linear-gradient(to right, #ec4899 0%, #f43f5e 51%, #ec4899 100%); }
-    .btn-3 { background-image: linear-gradient(to right, #10b981 0%, #059669 51%, #10b981 100%); }
-    .btn-4 { background-image: linear-gradient(to right, #3b82f6 0%, #1d4ed8 51%, #3b82f6 100%); }
-    .btn-5 { background-image: linear-gradient(to right, #f59e0b 0%, #d97706 51%, #f59e0b 100%); }
-    .btn-6 { background-image: linear-gradient(to right, #8b5cf6 0%, #7c3aed 51%, #8b5cf6 100%); }
-    .btn-7 { background-image: linear-gradient(to right, #06b6d4 0%, #0891b2 51%, #06b6d4 100%); }
-    .btn-8 { background-image: linear-gradient(to right, #f97316 0%, #ea580c 51%, #f97316 100%); }
-    .btn-9 { background-image: linear-gradient(to right, #e879f9 0%, #c026d3 51%, #e879f9 100%); }
-    .btn-10 { background-image: linear-gradient(to right, #0ea5e9 0%, #0284c7 51%, #0ea5e9 100%); }
-    .btn-11 { background-image: linear-gradient(to right, #84cc16 0%, #65a30d 51%, #84cc16 100%); }
-    .btn-12 { background-image: linear-gradient(to right, #facc15 0%, #eab308 51%, #facc15 100%); }
-    .btn-13 { background-image: linear-gradient(to right, #a78bfa 0%, #9333ea 51%, #a78bfa 100%); }
-    .btn-14 { background-image: linear-gradient(to right, #60a5fa 0%, #3b82f6 51%, #60a5fa 100%); }
-    .btn-15 { background-image: linear-gradient(to right, #f472b6 0%, #ec4899 51%, #f472b6 100%); }
-    .btn-16 { background-image: linear-gradient(to right, #2dd4bf 0%, #14b8a6 51%, #2dd4bf 100%); }
-    .btn-17 { background-image: linear-gradient(to right, #38bdf9 0%, #10b981 51%, #38bdf9 100%); }
-    .btn-18 { background-image: linear-gradient(to right, #fb923c 0%, #f97316 51%, #fb923c 100%); }
-    .btn-19 { background-image: linear-gradient(to right, #818cf8 0%, #6366f1 51%, #818cf8 100%); }
-    .btn-20 { background-image: linear-gradient(to right, #a78bfa 0%, #8b5cf6 51%, #a78bfa 100%); }
-    .btn-21 { background-image: linear-gradient(to right, #38bdf8 0%, #0ea5e9 51%, #38bdf8 100%); }
-    .btn-22 { background-image: linear-gradient(to right, #fbbf24 0%, #f59e0b 51%, #fbbf24 100%); }
-    .btn-23 { background-image: linear-gradient(to right, #22d3ee 0%, #06b6d4 51%, #22d3ee 100%); }
-    .btn-24 { background-image: linear-gradient(to right, #c084fc 0%, #a855f7 51%, #c084fc 100%); }
-    .btn-25 { background-image: linear-gradient(to right, #4f46e5 0%, #4338ca 51%, #4f46e5 100%); }
-    .btn-26 { background-image: linear-gradient(to right, #f43f5e 0%, #e11d48 51%, #f43f5e 100%); }
-    .btn-27 { background-image: linear-gradient(to right, #14b8a6 0%, #0d9488 51%, #14b8a6 100%); }
-    .btn-28 { background-image: linear-gradient(to right, #f59e0b 0%, #d97706 51%, #f59e0b 100%); }
-
     /* MODAL STYLES */
     .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.7); backdrop-filter: blur(5px); }
     .modal-content {
@@ -236,48 +210,48 @@
     </header>
 
     <div class="button-grid" id="buttonContainer">
-      <!-- ALL BUTTONS RESTORED -->
-      <a href="https://docs.google.com/spreadsheets/d/1p1LreGjZFEWSY3qfkbGaWGymDa_3kzwucDH3xHoPzqU/edit?resourcekey=&gid=1066878755#gid=1066878755" class="btn btn-1" target="_blank" data-tags="finance" data-id="noida-tax-invoice"><i class="fas fa-file-invoice-dollar"></i><span class="btn-text">Noida Tax Invoice Log</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1clgoSGc3BF6u25v-cumlJMqrCOZYSydWJ_xSAOpe0FE/edit?gid=82980654#gid=82980654" class="btn btn-2" target="_blank" data-tags="finance" data-id="186-tax-invoice"><i class="fas fa-receipt"></i><span class="btn-text">186 Tax Invoice Log</span></a>
-      <a href="https://192.168.20.7/vgeinvoice/LoginPage.aspx" class="btn btn-3" target="_blank" data-tags="finance,tools" data-id="eway-bill"><i class="fas fa-truck-fast"></i><span class="btn-text">E-Way Bill Dashboard</span></a>
-      <a href="https://smallpdf.com/merge-pdf#r=organize-merge" class="btn btn-4" target="_blank" data-tags="tools" data-id="merge-pdf"><i class="fas fa-file-pdf"></i><span class="btn-text">Merge PDF</span></a>
-      <a href="https://www.office.com/apps/?auth=2" class="btn btn-5" target="_blank" data-tags="tools" data-id="app-365"><i class="fab fa-microsoft"></i><span class="btn-text">Office 365 Apps</span></a>
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQf5LaxGX8lLr4nN7hPmrL3mpuaFv1uzYMTaIb02IcGFHp5g/viewform" class="btn btn-6" target="_blank" data-tags="finance" data-id="chargeback-form"><i class="fas fa-undo-alt"></i><span class="btn-text">Chargeback Form</span></a>
-      <a href="https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B5DE750E6-1A38-4B42-B02D-44A3D95B2D14%7D&file=Book%206.xlsx&action=editnew&mobileredirect=true" class="btn btn-7" target="_blank" data-tags="sales" data-id="daily-sale-186"><i class="fas fa-calendar-day"></i><span class="btn-text">Daily Sale 186</span></a>
-      <a href="https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B866121D0-C91C-4F09-9F0B-909FBB0C2324%7D&file=DAILY%20SALE%20ENTERY%20NOIDA.xlsx&action=default&mobileredirect=true" class="btn btn-8" target="_blank" data-tags="sales" data-id="dsec16-sale"><i class="fas fa-cash-register"></i><span class="btn-text">D-S-E-C16 (Noida Sale)</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/11RCeL6pUqN8khww5sY_iA_t-mNgrzwQNvV-bRtLKA9s/edit?gid=0#gid=0" class="btn btn-9" target="_blank" data-tags="inventory,sales" data-id="noida-order-entry"><i class="fas fa-clipboard-check"></i><span class="btn-text">Noida Order Entry</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1V92jsBq9iTbYnaoaIdmYdbYc9uoFvaimxaYScnHLD7w/edit?resourcekey=&gid=388707961#gid=388707961" class="btn btn-10" target="_blank" data-tags="finance" data-id="chargeback-data"><i class="fas fa-hand-holding-usd"></i><span class="btn-text">Chargeback Data</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/17XLwAmZxvmxOaB-DzPIBjuGmb3u_Zxz9_1aGn175yeE/edit?gid=0#gid=0" class="btn btn-11" target="_blank" data-tags="reports,sales" data-id="live-graph-quince"><i class="fas fa-chart-line"></i><span class="btn-text">Live Graph Quince</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1c4VbDj3CCp_Lr2MCpoJXmlp2K9qP6L3pIA0eZq52PDM/edit?gid=2065470756#gid=2065470756" class="btn btn-12" target="_blank" data-tags="reports,sales" data-id="quince-2024-sale"><i class="fas fa-database"></i><span class="btn-text">QUINCE 2024 SALE DATA</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1sehWq-1kvNwl0qZWOpkhapuk9mam0FjKAoJvHMV9U5o/edit?usp=sharing" class="btn btn-13" target="_blank" data-tags="inventory,operations" data-id="maersk-stock-data"><i class="fas fa-ship"></i><span class="btn-text">MAERSK Stock Data</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/17RWCZ62o2nRvMgZjfi_fZ6AyBQ0YmHNoIp-CCRSxJjg/edit?gid=407320691#gid=407320691" class="btn btn-14" target="_blank" data-tags="sales" data-id="quince-2025-pos"><i class="fas fa-shopping-cart"></i><span class="btn-text">QUINCE 2025 POS DATA</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1PnetSLtEPxot9N3KlB_ydbzNccAF5qMnDMRmYLo6ZLs/edit?gid=0#gid=0" class="btn btn-15" target="_blank" data-tags="sales,finance" data-id="quince-invoice-summary"><i class="fas fa-file-invoice"></i><span class="btn-text">Quince Invoice Summary</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1riS3U9aPW7s8SQmqaZkGrb2fHVEdDbJdHxwdygaeKXc/edit?gid=1345083956#gid=1345083956" class="btn btn-16" target="_blank" data-tags="sales,reports" data-id="ggn-sales-overview"><i class="fas fa-city"></i><span class="btn-text">Gurugram Sales Overview</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/15Xma9DRkRectWPqUKDQlr5yZQMtCfQ2Bxa_J5vU-Es0/edit?gid=1345083956#gid=1345083956" class="btn btn-17" target="_blank" data-tags="sales,reports" data-id="noida-sales-overview"><i class="fas fa-building-user"></i><span class="btn-text">Noida Sales Overview</span></a>
-      <a href="https://sites.google.com/view/bossanishji/" class="btn btn-18" target="_blank" data-tags="tools" data-id="anish-sir-site"><i class="fas fa-user-tie"></i><span class="btn-text">Anish Sir's Site</span></a>
-      <a href="https://sites.google.com/view/radnikaks/home?authuser=0" class="btn btn-19" target="_blank" data-tags="tools" data-id="amit-chaudhary-site"><i class="fas fa-user-astronaut"></i><span class="btn-text">Amit Chaudhary's Site</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_ihmuGBmPjY_SF6zXQe825cL0i3O9FjTod0gVVgjvc9uSU1HrQsSxcGSVRLAUrJA8NjruJPKs7ezi/pubhtml?gid=1345083956&single=true" class="btn btn-20" target="_blank" data-tags="reports" data-id="186-qs-view"><i class="fas fa-chart-pie"></i><span class="btn-text">186-Q-S-VIEW</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1MRNcqWJsXyp4gKAq00N2qKmjoNgXkwVCmxH2lBeeitlz0kNfSiY-z1sNK2JTciPN6mzUpF9-G36Z/pubhtml?gid=1345083956&single=true" class="btn btn-21" target="_blank" data-tags="reports" data-id="c16-qs-view"><i class="fas fa-chart-area"></i><span class="btn-text">C16-Q-S-VIEW</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1m3q0x9wKoM7Q7EBSCvpCTozbtB0-73xmgOO_Yx0EBAg/edit?gid=579600821#gid=579600821" class="btn btn-22" target="_blank" data-tags="inventory" data-id="c16-import-details"><i class="fas fa-file-import"></i><span class="btn-text">C16-IMPORT DETAILS</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1LZa3JvfEdt-9cdQkEmsEluwurMoDzmsXIyFWNpAcnfs/edit?gid=1102120828#gid=1102120828" class="btn btn-23" target="_blank" data-tags="inventory" data-id="ggn-prep-2025"><i class="fas fa-tasks"></i><span class="btn-text">GGN-PREPEMENT 2025</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1l2CnQrl9YEfOFAoiqj82DYwJ-zQWYqCX5HuL87ffRlw/edit?gid=2040776333#gid=2040776333" class="btn btn-24" target="_blank" data-tags="reports,sales" data-id="quince-hk"><i class="fas fa-globe-asia"></i><span class="btn-text">Quince Hong Kong</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1QzAuxxuLUz60iWbdiVGzAFDjXY0RSZIda_0VOhbloEU/edit?gid=1012800260#gid=1012800260" class="btn btn-25" target="_blank" data-tags="reports,sales" data-id="projection-vs-sales"><i class="fas fa-bullseye"></i><span class="btn-text">Projection VS Sales Report</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1JFI22zsy2Pa5d2lq4dcEeCZIg7rqFaBMYPzniBdlhMc/edit?gid=874524179#gid=874524179" class="btn btn-26" target="_blank" data-tags="reports,inventory" data-id="quince-order-chart"><i class="fas fa-list-ol"></i><span class="btn-text">QUINCE ORDER CHART</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1f7bODkOgwvN_i-nWItzn_67IZv0EqXxAqr2v-ZRQ8Vg/edit?gid=685323596#gid=685323596" class="btn btn-27" target="_blank" data-tags="reports,sales" data-id="projection-vs-actual"><i class="fas fa-project-diagram"></i><span class="btn-text">PROJECTION VS ACTUAL</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1_5-nGWZmyI5WkTSp6muKe7uEhel7DoAzX1oisoBz1Xw/edit?gid=211447390#gid=211447390" class="btn btn-28" target="_blank" data-tags="reports,sales,inventory" data-id="quince-sale-hub"><i class="fas fa-sitemap"></i><span class="btn-text">Quince Sale All Data Hub</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1bQqiCaiQ_JGN_B-415ftvVgoH9MmaF9A4ydZkkYXS-Q/edit?gid=5003036#gid=5003036" class="btn btn-1" target="_blank" data-tags="inventory" data-id="po-wise-qty"><i class="fas fa-exchange-alt"></i><span class="btn-text">PO Wise Qty Send/Sale</span></a>
-      <a href="https://amitaadhya.github.io/Quincesaleggn/" class="btn btn-2" target="_blank" data-tags="reports,sales" data-id="sales-perf-ggn"><i class="fas fa-tachometer-alt"></i><span class="btn-text">Sales Perf. Dashboard-GGN</span></a>
-      <a href="https://amitaadhya.github.io/noidaquincesale/" class="btn btn-3" target="_blank" data-tags="reports,sales" data-id="sales-perf-noida"><i class="fas fa-chart-bar"></i><span class="btn-text">NOIDA-Sales Perf. Dash.</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1GQucVQMxZanFgg27PGDpflR49a6DksezH4Pby2uFu4A/edit?gid=0#gid=0" class="btn btn-4" target="_blank" data-tags="reports,finance" data-id="quince-style-value"><i class="fas fa-dollar-sign"></i><span class="btn-text">QUINCE Style Name Wise Value</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1PnetSLtEPxot9N3KlB_ydbzNccAF5qMnDMRmYLo6ZLs/edit?gid=0#gid=0" class="btn btn-5" target="_blank" data-tags="reports,sales" data-id="quince-invoice-summary-2"><i class="fas fa-file-alt"></i><span class="btn-text">Quince_Invoice Summary</span></a>
-      <a href="https://script.google.com/macros/s/AKfycbwMLk_TuKGtxzLFMxIoLVONqYMS5RRCf3cBqS9zDw/dev" class="btn btn-6" target="_blank" data-tags="reports,sales" data-id="style-analyzer-ggn"><i class="fas fa-search-dollar"></i><span class="btn-text">Quince_ Style Analyzer_GGN</span></a>
-      <a href="https://script.google.com/macros/s/AKfycbzljj_8OxdNR2AtJqxfTD_oB11YGTdF0MGulyLCvpE/dev" class="btn btn-7" target="_blank" data-tags="reports,sales" data-id="style-analyzer-noida"><i class="fas fa-search-location"></i><span class="btn-text">Quince_ Style Analyzer_NOIDA</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1EfFlN6kb_q08R3cWQT_LJfRoSCKvGpS_JkJGZaUMA34/edit?gid=2040776333#gid=2040776333" class="btn btn-8" target="_blank" data-tags="reports,sales" data-id="quince-shipping-data"><i class="fas fa-globe-americas"></i><span class="btn-text">Quince Mexcio & Canada Ship Data </span></a>
-      <a href="https://www.notion.so/Welcome-to-Amit-Chaudhary-22a7a00d4f9780fe8865e67bf16d2430" class="btn btn-9" target="_blank" data-tags="tools" data-id="useful-websites"><i class="fas fa-star"></i><span class="btn-text">Most Useful Websites (AKS!)</span></a>
-      <a href="https://script.google.com/macros/s/AKfycbw6qke8xOhYaqaxcjFOgp-_wtWAwXEAfVqJA8e6-A/dev" class="btn btn-10" target="_blank" data-tags="finance,reports,sales" data-id="ggn-revenue-chargeback"><i class="fas fa-file-excel"></i><span class="btn-text">GGN Revenue & Chargeback Summary</span></a>
-      <a href="https://script.google.com/macros/s/AKfycbw1Dpw--Ar3rNg3IgPn3e32gpUODmv_O12053XHUYc/dev" class="btn btn-11" target="_blank" data-tags="finance,reports,sales" data-id="noida-revenue-chargeback"><i class="far fa-file-excel"></i><span class="btn-text">NOIDA Revenue & Chargeback Summary</span></a>
-      <a href="https://script.google.com/macros/s/AKfycbwEj1e1d0DfYqaTPbDarQTTYiMaiRWOodd5Cu6x4Sc/dev" class="btn btn-12" target="_blank" data-tags="finance,reports,sales" data-id="payment-management"><i class="fas fa-credit-card"></i><span class="btn-text">Radnik Q Payment Management</span></a>
-      <a href="https://docs.google.com/spreadsheets/d/1pcb48pdm_kwASlmRACu1_E3s1_DHcofF5uOx6h4mLXY/edit?gid=1794473938#gid=1794473938" class="btn btn-13" target="_blank" data-tags="finance,reports" data-id="quince-po-records"><i class="fas fa-archive"></i><span class="btn-text">QUINCE PO RECORDS</span></a>
+      <!-- ALL BUTTONS WILL NOW HAVE THE SAME THEME COLOR -->
+      <a href="https://docs.google.com/spreadsheets/d/1p1LreGjZFEWSY3qfkbGaWGymDa_3kzwucDH3xHoPzqU/edit?resourcekey=&gid=1066878755#gid=1066878755" class="btn" target="_blank" data-tags="finance" data-id="noida-tax-invoice"><i class="fas fa-file-invoice-dollar"></i><span class="btn-text">Noida Tax Invoice Log</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1clgoSGc3BF6u25v-cumlJMqrCOZYSydWJ_xSAOpe0FE/edit?gid=82980654#gid=82980654" class="btn" target="_blank" data-tags="finance" data-id="186-tax-invoice"><i class="fas fa-receipt"></i><span class="btn-text">186 Tax Invoice Log</span></a>
+      <a href="https://192.168.20.7/vgeinvoice/LoginPage.aspx" class="btn" target="_blank" data-tags="finance,tools" data-id="eway-bill"><i class="fas fa-truck-fast"></i><span class="btn-text">E-Way Bill Dashboard</span></a>
+      <a href="https://smallpdf.com/merge-pdf#r=organize-merge" class="btn" target="_blank" data-tags="tools" data-id="merge-pdf"><i class="fas fa-file-pdf"></i><span class="btn-text">Merge PDF</span></a>
+      <a href="https://www.office.com/apps/?auth=2" class="btn" target="_blank" data-tags="tools" data-id="app-365"><i class="fab fa-microsoft"></i><span class="btn-text">Office 365 Apps</span></a>
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQf5LaxGX8lLr4nN7hPmrL3mpuaFv1uzYMTaIb02IcGFHp5g/viewform" class="btn" target="_blank" data-tags="finance" data-id="chargeback-form"><i class="fas fa-undo-alt"></i><span class="btn-text">Chargeback Form</span></a>
+      <a href="https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B5DE750E6-1A38-4B42-B02D-44A3D95B2D14%7D&file=Book%206.xlsx&action=editnew&mobileredirect=true" class="btn" target="_blank" data-tags="sales" data-id="daily-sale-186"><i class="fas fa-calendar-day"></i><span class="btn-text">Daily Sale 186</span></a>
+      <a href="https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B866121D0-C91C-4F09-9F0B-909FBB0C2324%7D&file=DAILY%20SALE%20ENTERY%20NOIDA.xlsx&action=default&mobileredirect=true" class="btn" target="_blank" data-tags="sales" data-id="dsec16-sale"><i class="fas fa-cash-register"></i><span class="btn-text">D-S-E-C16 (Noida Sale)</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/11RCeL6pUqN8khww5sY_iA_t-mNgrzwQNvV-bRtLKA9s/edit?gid=0#gid=0" class="btn" target="_blank" data-tags="inventory,sales" data-id="noida-order-entry"><i class="fas fa-clipboard-check"></i><span class="btn-text">Noida Order Entry</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1V92jsBq9iTbYnaoaIdmYdbYc9uoFvaimxaYScnHLD7w/edit?resourcekey=&gid=388707961#gid=388707961" class="btn" target="_blank" data-tags="finance" data-id="chargeback-data"><i class="fas fa-hand-holding-usd"></i><span class="btn-text">Chargeback Data</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/17XLwAmZxvmxOaB-DzPIBjuGmb3u_Zxz9_1aGn175yeE/edit?gid=0#gid=0" class="btn" target="_blank" data-tags="reports,sales" data-id="live-graph-quince"><i class="fas fa-chart-line"></i><span class="btn-text">Live Graph Quince</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1c4VbDj3CCp_Lr2MCpoJXmlp2K9qP6L3pIA0eZq52PDM/edit?gid=2065470756#gid=2065470756" class="btn" target="_blank" data-tags="reports,sales" data-id="quince-2024-sale"><i class="fas fa-database"></i><span class="btn-text">QUINCE 2024 SALE DATA</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1sehWq-1kvNwl0qZWOpkhapuk9mam0FjKAoJvHMV9U5o/edit?usp=sharing" class="btn" target="_blank" data-tags="inventory,operations" data-id="maersk-stock-data"><i class="fas fa-ship"></i><span class="btn-text">MAERSK Stock Data</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/17RWCZ62o2nRvMgZjfi_fZ6AyBQ0YmHNoIp-CCRSxJjg/edit?gid=407320691#gid=407320691" class="btn" target="_blank" data-tags="sales" data-id="quince-2025-pos"><i class="fas fa-shopping-cart"></i><span class="btn-text">QUINCE 2025 POS DATA</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1PnetSLtEPxot9N3KlB_ydbzNccAF5qMnDMRmYLo6ZLs/edit?gid=0#gid=0" class="btn" target="_blank" data-tags="sales,finance" data-id="quince-invoice-summary"><i class="fas fa-file-invoice"></i><span class="btn-text">Quince Invoice Summary</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1riS3U9aPW7s8SQmqaZkGrb2fHVEdDbJdHxwdygaeKXc/edit?gid=1345083956#gid=1345083956" class="btn" target="_blank" data-tags="sales,reports" data-id="ggn-sales-overview"><i class="fas fa-city"></i><span class="btn-text">Gurugram Sales Overview</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/15Xma9DRkRectWPqUKDQlr5yZQMtCfQ2Bxa_J5vU-Es0/edit?gid=1345083956#gid=1345083956" class="btn" target="_blank" data-tags="sales,reports" data-id="noida-sales-overview"><i class="fas fa-building-user"></i><span class="btn-text">Noida Sales Overview</span></a>
+      <a href="https://sites.google.com/view/bossanishji/" class="btn" target="_blank" data-tags="tools" data-id="anish-sir-site"><i class="fas fa-user-tie"></i><span class="btn-text">Anish Sir's Site</span></a>
+      <a href="https://sites.google.com/view/radnikaks/home?authuser=0" class="btn" target="_blank" data-tags="tools" data-id="amit-chaudhary-site"><i class="fas fa-user-astronaut"></i><span class="btn-text">Amit Chaudhary's Site</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_ihmuGBmPjY_SF6zXQe825cL0i3O9FjTod0gVVgjvc9uSU1HrQsSxcGSVRLAUrJA8NjruJPKs7ezi/pubhtml?gid=1345083956&single=true" class="btn" target="_blank" data-tags="reports" data-id="186-qs-view"><i class="fas fa-chart-pie"></i><span class="btn-text">186-Q-S-VIEW</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vT1MRNcqWJsXyp4gKAq00N2qKmjoNgXkwVCmxH2lBeeitlz0kNfSiY-z1sNK2JTciPN6mzUpF9-G36Z/pubhtml?gid=1345083956&single=true" class="btn" target="_blank" data-tags="reports" data-id="c16-qs-view"><i class="fas fa-chart-area"></i><span class="btn-text">C16-Q-S-VIEW</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1m3q0x9wKoM7Q7EBSCvpCTozbtB0-73xmgOO_Yx0EBAg/edit?gid=579600821#gid=579600821" class="btn" target="_blank" data-tags="inventory" data-id="c16-import-details"><i class="fas fa-file-import"></i><span class="btn-text">C16-IMPORT DETAILS</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1LZa3JvfEdt-9cdQkEmsEluwurMoDzmsXIyFWNpAcnfs/edit?gid=1102120828#gid=1102120828" class="btn" target="_blank" data-tags="inventory" data-id="ggn-prep-2025"><i class="fas fa-tasks"></i><span class="btn-text">GGN-PREPEMENT 2025</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1l2CnQrl9YEfOFAoiqj82DYwJ-zQWYqCX5HuL87ffRlw/edit?gid=2040776333#gid=2040776333" class="btn" target="_blank" data-tags="reports,sales" data-id="quince-hk"><i class="fas fa-globe-asia"></i><span class="btn-text">Quince Hong Kong</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1QzAuxxuLUz60iWbdiVGzAFDjXY0RSZIda_0VOhbloEU/edit?gid=1012800260#gid=1012800260" class="btn" target="_blank" data-tags="reports,sales" data-id="projection-vs-sales"><i class="fas fa-bullseye"></i><span class="btn-text">Projection VS Sales Report</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1JFI22zsy2Pa5d2lq4dcEeCZIg7rqFaBMYPzniBdlhMc/edit?gid=874524179#gid=874524179" class="btn" target="_blank" data-tags="reports,inventory" data-id="quince-order-chart"><i class="fas fa-list-ol"></i><span class="btn-text">QUINCE ORDER CHART</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1f7bODkOgwvN_i-nWItzn_67IZv0EqXxAqr2v-ZRQ8Vg/edit?gid=685323596#gid=685323596" class="btn" target="_blank" data-tags="reports,sales" data-id="projection-vs-actual"><i class="fas fa-project-diagram"></i><span class="btn-text">PROJECTION VS ACTUAL</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1_5-nGWZmyI5WkTSp6muKe7uEhel7DoAzX1oisoBz1Xw/edit?gid=211447390#gid=211447390" class="btn" target="_blank" data-tags="reports,sales,inventory" data-id="quince-sale-hub"><i class="fas fa-sitemap"></i><span class="btn-text">Quince Sale All Data Hub</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1bQqiCaiQ_JGN_B-415ftvVgoH9MmaF9A4ydZkkYXS-Q/edit?gid=5003036#gid=5003036" class="btn" target="_blank" data-tags="inventory" data-id="po-wise-qty"><i class="fas fa-exchange-alt"></i><span class="btn-text">PO Wise Qty Send/Sale</span></a>
+      <a href="https://amitaadhya.github.io/Quincesaleggn/" class="btn" target="_blank" data-tags="reports,sales" data-id="sales-perf-ggn"><i class="fas fa-tachometer-alt"></i><span class="btn-text">Sales Perf. Dashboard-GGN</span></a>
+      <a href="https://amitaadhya.github.io/noidaquincesale/" class="btn" target="_blank" data-tags="reports,sales" data-id="sales-perf-noida"><i class="fas fa-chart-bar"></i><span class="btn-text">NOIDA-Sales Perf. Dash.</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1GQucVQMxZanFgg27PGDpflR49a6DksezH4Pby2uFu4A/edit?gid=0#gid=0" class="btn" target="_blank" data-tags="reports,finance" data-id="quince-style-value"><i class="fas fa-dollar-sign"></i><span class="btn-text">QUINCE Style Name Wise Value</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1PnetSLtEPxot9N3KlB_ydbzNccAF5qMnDMRmYLo6ZLs/edit?gid=0#gid=0" class="btn" target="_blank" data-tags="reports,sales" data-id="quince-invoice-summary-2"><i class="fas fa-file-alt"></i><span class="btn-text">Quince_Invoice Summary</span></a>
+      <a href="https://script.google.com/macros/s/AKfycbwMLk_TuKGtxzLFMxIoLVONqYMS5RRCf3cBqS9zDw/dev" class="btn" target="_blank" data-tags="reports,sales" data-id="style-analyzer-ggn"><i class="fas fa-search-dollar"></i><span class="btn-text">Quince_ Style Analyzer_GGN</span></a>
+      <a href="https://script.google.com/macros/s/AKfycbzljj_8OxdNR2AtJqxfTD_oB11YGTdF0MGulyLCvpE/dev" class="btn" target="_blank" data-tags="reports,sales" data-id="style-analyzer-noida"><i class="fas fa-search-location"></i><span class="btn-text">Quince_ Style Analyzer_NOIDA</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1EfFlN6kb_q08R3cWQT_LJfRoSCKvGpS_JkJGZaUMA34/edit?gid=2040776333#gid=2040776333" class="btn" target="_blank" data-tags="reports,sales" data-id="quince-shipping-data"><i class="fas fa-globe-americas"></i><span class="btn-text">Quince Mexcio & Canada Ship Data </span></a>
+      <a href="https://www.notion.so/Welcome-to-Amit-Chaudhary-22a7a00d4f9780fe8865e67bf16d2430" class="btn" target="_blank" data-tags="tools" data-id="useful-websites"><i class="fas fa-star"></i><span class="btn-text">Most Useful Websites (AKS!)</span></a>
+      <a href="https://script.google.com/macros/s/AKfycbw6qke8xOhYaqaxcjFOgp-_wtWAwXEAfVqJA8e6-A/dev" class="btn" target="_blank" data-tags="finance,reports,sales" data-id="ggn-revenue-chargeback"><i class="fas fa-file-excel"></i><span class="btn-text">GGN Revenue & Chargeback Summary</span></a>
+      <a href="https://script.google.com/macros/s/AKfycbw1Dpw--Ar3rNg3IgPn3e32gpUODmv_O12053XHUYc/dev" class="btn" target="_blank" data-tags="finance,reports,sales" data-id="noida-revenue-chargeback"><i class="far fa-file-excel"></i><span class="btn-text">NOIDA Revenue & Chargeback Summary</span></a>
+      <a href="https://script.google.com/macros/s/AKfycbwEj1e1d0DfYqaTPbDarQTTYiMaiRWOodd5Cu6x4Sc/dev" class="btn" target="_blank" data-tags="finance,reports,sales" data-id="payment-management"><i class="fas fa-credit-card"></i><span class="btn-text">Radnik Q Payment Management</span></a>
+      <a href="https://docs.google.com/spreadsheets/d/1pcb48pdm_kwASlmRACu1_E3s1_DHcofF5uOx6h4mLXY/edit?gid=1794473938#gid=1794473938" class="btn" target="_blank" data-tags="finance,reports" data-id="quince-po-records"><i class="fas fa-archive"></i><span class="btn-text">QUINCE PO RECORDS</span></a>
     </div>
   </main>
   
