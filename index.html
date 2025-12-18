@@ -3,48 +3,59 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amit Chaudhary | Radnik Hub</title>
+  <title>Amit Chaudhary | Amit Chaudhary</title>
   <link rel="icon" href="https://i.postimg.cc/sXPJH9xd/Screenshot-2025-06-19-143219.png" type="image/png">
   
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   
   <style>
     :root {
-      --bg-dark: #030712;
-      --bg-card: #111827;
-      --accent: #06b6d4;
-      --accent-glow: rgba(6, 182, 212, 0.3);
-      --text-main: #f3f4f6;
-      --text-muted: #9ca3af;
-      --glass-bg: rgba(17, 24, 39, 0.7);
-      --glass-border: rgba(255, 255, 255, 0.08);
+      --bg-dark: #0a0a0a;
+      --bg-card: rgba(17, 24, 39, 0.6);
+      --accent: #00d4ff;
+      --accent-glow: rgba(0, 212, 255, 0.4);
+      --text-main: #ffffff;
+      --text-muted: #a0aec0;
+      --glass-bg: rgba(17, 24, 39, 0.4);
+      --glass-border: rgba(255, 255, 255, 0.1);
       --sidebar-width: 280px;
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
       font-family: 'Inter', sans-serif;
-      background-color: var(--bg-dark);
+      background: var(--bg-dark);
       color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
       background-image: 
-        radial-gradient(circle at 15% 50%, rgba(6, 182, 212, 0.08), transparent 25%), 
-        radial-gradient(circle at 85% 30%, rgba(124, 58, 237, 0.08), transparent 25%);
+        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.1), transparent 30%),
+        radial-gradient(circle at 40% 80%, rgba(79, 172, 254, 0.1), transparent 30%);
     }
 
-    /* Scrollbar */
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: transparent; }
-    ::-webkit-scrollbar-thumb { background: #374151; border-radius: 10px; }
-    ::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+    /* Enhanced Scrollbar */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
+    ::-webkit-scrollbar-thumb { 
+      background: linear-gradient(45deg, var(--accent), #764ba2); 
+      border-radius: 10px; 
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+    ::-webkit-scrollbar-thumb:hover { 
+      background: linear-gradient(45deg, #00f2fe, var(--accent)); 
+    }
 
-    /* Preloader */
+    /* Enhanced Preloader */
     #preloader {
       position: fixed; inset: 0; background: var(--bg-dark); z-index: 9999;
       display: flex; justify-content: center; align-items: center;
@@ -52,20 +63,28 @@
     }
     #preloader.hidden { opacity: 0; pointer-events: none; }
     .loader {
-      width: 50px; height: 50px;
+      width: 60px; height: 60px;
       border: 3px solid rgba(255,255,255,0.1);
       border-radius: 50%; border-top-color: var(--accent);
       animation: spin 1s ease-in-out infinite;
-      box-shadow: 0 0 20px var(--accent-glow);
+      box-shadow: 0 0 30px var(--accent-glow);
+      position: relative;
     }
-    @keyframes spin { to { transform: rotate(360deg); } }
+    .loader::before {
+      content: ''; position: absolute; inset: -5px;
+      border-radius: 50%; border: 2px solid transparent;
+      border-top-color: #764ba2; animation: spin 1.5s ease-in-out infinite;
+    }
+    @keyframes spin { 
+      to { transform: rotate(360deg); } 
+    }
 
-    /* Login Screen */
+    /* Enhanced Login Screen with Glassmorphism */
     .login-container {
       position: fixed; inset: 0; z-index: 2000;
       display: flex; justify-content: center; align-items: center;
-      background: rgba(3, 7, 18, 0.6);
-      backdrop-filter: blur(15px);
+      background: rgba(10, 10, 10, 0.8);
+      backdrop-filter: blur(20px);
       transition: 0.5s;
     }
     .login-container.hidden { opacity: 0; visibility: hidden; transform: scale(0.95); }
@@ -76,32 +95,56 @@
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       border-radius: 24px;
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+      box-shadow: 
+        0 25px 50px -12px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(0, 212, 255, 0.1);
       text-align: center;
       position: relative;
       overflow: hidden;
       margin: 20px;
+      backdrop-filter: blur(20px);
     }
     
-    .login-box::after {
-      content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
+    .login-box::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
       background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      animation: shimmer 2s infinite;
+    }
+    
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
     }
 
     .logo-glow {
-      width: 90px; height: 90px; margin: 0 auto 20px;
+      width: 100px; height: 100px; margin: 0 auto 20px;
       border-radius: 50%; padding: 4px;
-      background: linear-gradient(135deg, var(--bg-card), #1f2937);
-      box-shadow: 0 0 30px rgba(6, 182, 212, 0.2);
-      border: 1px solid var(--glass-border);
+      background: var(--gradient-1);
+      box-shadow: 0 0 40px var(--accent-glow);
+      border: 2px solid var(--glass-border);
+      animation: pulse 2s infinite;
     }
+    
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+    
     .logo-glow img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
-    .login-box h1 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; margin-bottom: 5px; }
+    .login-box h1 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 2.2rem; 
+      margin-bottom: 5px; 
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .login-box > p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 30px; }
 
     .input-field {
-      position: relative; margin-bottom: 16px;
+      position: relative; margin-bottom: 20px;
     }
     .input-field i {
       position: absolute; left: 16px; top: 50%; transform: translateY(-50%);
@@ -125,57 +168,95 @@
 
     .btn-primary {
       width: 100%; padding: 16px;
-      background: var(--accent);
-      color: #000; font-weight: 700;
+      background: var(--gradient-1);
+      color: white; font-weight: 700;
       border: none; border-radius: 12px;
       cursor: pointer; font-size: 1rem;
       transition: 0.3s; text-transform: uppercase;
       letter-spacing: 0.5px;
       box-shadow: 0 10px 20px -5px var(--accent-glow);
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-primary::before {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: 0.5s;
+    }
+    .btn-primary:hover::before {
+      left: 100%;
     }
     .btn-primary:hover {
-      background: #22d3ee; transform: translateY(-2px);
+      transform: translateY(-2px);
       box-shadow: 0 15px 25px -5px var(--accent-glow);
     }
     .btn-primary:active { transform: translateY(0); }
 
-    /* Main Layout */
+    /* Enhanced Main Layout */
     .portal-view {
       display: flex; min-height: 100vh; overflow: hidden;
       opacity: 0; pointer-events: none; transition: 0.5s;
     }
     .portal-view.visible { opacity: 1; pointer-events: auto; }
 
-    /* Sidebar */
+    /* Enhanced Sidebar */
     .sidebar {
       width: var(--sidebar-width); min-height: 100vh;
-      background: var(--bg-card);
+      background: var(--glass-bg);
       border-right: 1px solid var(--glass-border);
       display: flex; flex-direction: column;
       padding: 24px; z-index: 100;
       transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       position: fixed; left: 0; top: 0; bottom: 0;
+      backdrop-filter: blur(20px);
     }
 
     .brand-logo {
       display: flex; align-items: center; gap: 12px;
       margin-bottom: 40px; padding-left: 10px;
     }
-    .brand-logo i { font-size: 1.5rem; color: var(--accent); }
-    .brand-logo span { font-family: 'Space Grotesk', sans-serif; font-size: 1.25rem; font-weight: 700; }
+    .brand-logo i { 
+      font-size: 1.5rem; 
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .brand-logo span { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 1.25rem; 
+      font-weight: 700; 
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
     .nav-links { flex: 1; list-style: none; display: flex; flex-direction: column; gap: 8px; }
     .nav-item a {
       display: flex; align-items: center; gap: 14px;
       padding: 14px 16px; border-radius: 12px;
       color: var(--text-muted); text-decoration: none;
-      font-weight: 500; transition: 0.2s; cursor: pointer;
+      font-weight: 500; transition: 0.3s; cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .nav-item a::before {
+      content: ''; position: absolute; top: 0; left: -100%;
+      width: 100%; height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+      transition: 0.5s;
+    }
+    .nav-item a:hover::before {
+      left: 100%;
     }
     .nav-item a:hover {
-      background: rgba(255,255,255,0.03); color: white;
+      background: rgba(255,255,255,0.05); color: white;
+      transform: translateX(5px);
     }
     .nav-item a.active {
-      background: linear-gradient(90deg, rgba(6, 182, 212, 0.15), transparent);
+      background: linear-gradient(90deg, rgba(0, 212, 255, 0.15), transparent);
       color: var(--accent); border-left: 3px solid var(--accent);
     }
     .nav-item i { width: 20px; text-align: center; }
@@ -184,13 +265,18 @@
       padding: 16px; background: rgba(0,0,0,0.2);
       border-radius: 16px; display: flex; align-items: center; gap: 12px;
       border: 1px solid var(--glass-border); margin-top: auto;
+      transition: 0.3s;
+    }
+    .user-panel:hover {
+      background: rgba(0,0,0,0.3);
+      transform: translateY(-2px);
     }
     .user-panel img { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
     .user-details h4 { font-size: 0.9rem; margin-bottom: 2px; }
     .logout-btn { font-size: 0.75rem; color: #ef4444; cursor: pointer; text-decoration: none; }
     .logout-btn:hover { text-decoration: underline; }
 
-    /* Main Content */
+    /* Enhanced Main Content */
     .main-content {
       flex: 1; min-height: 100vh; overflow-y: auto;
       padding: 30px 40px; position: relative;
@@ -201,21 +287,35 @@
       display: flex; justify-content: space-between; align-items: center;
       margin-bottom: 40px; flex-wrap: wrap; gap: 15px;
     }
-    .welcome-section h2 { font-family: 'Space Grotesk', sans-serif; font-size: 2rem; }
+    .welcome-section h2 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      font-size: 2.5rem; 
+      background: var(--gradient-3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .welcome-section p { color: var(--text-muted); }
     
     .clock-badge {
-      background: rgba(6, 182, 212, 0.1); color: var(--accent);
-      padding: 8px 16px; border-radius: 30px; border: 1px solid rgba(6, 182, 212, 0.2);
+      background: rgba(0, 212, 255, 0.1); color: var(--accent);
+      padding: 10px 20px; border-radius: 30px; border: 1px solid rgba(0, 212, 255, 0.2);
       font-family: 'Space Grotesk', monospace; font-weight: 600;
+      backdrop-filter: blur(10px);
+      animation: glow 2s infinite alternate;
+    }
+    
+    @keyframes glow {
+      from { box-shadow: 0 0 20px rgba(0, 212, 255, 0.3); }
+      to { box-shadow: 0 0 30px rgba(0, 212, 255, 0.6); }
     }
 
-    /* Search Bar */
+    /* Enhanced Search Bar */
     .toolbar {
       display: flex; gap: 15px; margin-bottom: 30px;
-      background: var(--bg-card); padding: 10px;
+      background: var(--glass-bg); padding: 10px;
       border-radius: 16px; border: 1px solid var(--glass-border);
-      flex-wrap: wrap;
+      flex-wrap: wrap; backdrop-filter: blur(10px);
     }
     .search-wrap { flex: 1; position: relative; min-width: 200px; }
     .search-wrap input {
@@ -228,73 +328,220 @@
     .search-wrap i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
     
     .category-select {
-      background: #1f2937; color: white; border: none;
+      background: rgba(0,0,0,0.3); color: white; border: none;
       padding: 14px 24px; border-radius: 10px; cursor: pointer;
       outline: none; font-family: 'Inter', sans-serif;
-      min-width: 150px;
+      min-width: 150px; border: 1px solid var(--glass-border);
+      transition: 0.3s;
+    }
+    .category-select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
 
-    /* Tool Cards Grid */
+    /* Enhanced Tool Cards Grid */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 24px; padding-bottom: 60px;
     }
 
     .tool-card {
       position: relative;
-      background: linear-gradient(145deg, #1f2937, #111827);
-      padding: 24px; border-radius: 20px;
+      background: var(--glass-bg);
+      padding: 28px; border-radius: 20px;
       text-decoration: none; color: white;
       border: 1px solid var(--glass-border);
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       display: flex; flex-direction: column;
       justify-content: space-between;
-      min-height: 160px; overflow: hidden;
+      min-height: 180px; overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    
+    .tool-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(135deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+      opacity: 0; transition: 0.3s;
+    }
+    
+    .tool-card:hover::before {
+      opacity: 1;
     }
     
     .tool-card:hover {
-      transform: translateY(-8px) scale(1.02);
+      transform: translateY(-10px) scale(1.02);
       border-color: var(--accent);
-      box-shadow: 0 20px 40px -10px rgba(0,0,0,0.5), 0 0 30px var(--accent-glow);
+      box-shadow: 
+        0 25px 50px -10px rgba(0, 0, 0, 0.5), 
+        0 0 40px var(--accent-glow);
     }
     
     .icon-box {
-      width: 50px; height: 50px;
+      width: 60px; height: 60px;
       background: rgba(255,255,255,0.05);
-      border-radius: 14px;
+      border-radius: 16px;
       display: flex; justify-content: center; align-items: center;
-      font-size: 1.5rem; color: var(--accent);
-      margin-bottom: 15px; transition: 0.3s;
-    }
-    .tool-card:hover .icon-box {
-      background: var(--accent); color: #000;
-      transform: rotate(-10deg);
+      font-size: 1.8rem; color: var(--accent);
+      margin-bottom: 20px; transition: 0.3s;
+      position: relative;
+      overflow: hidden;
     }
     
-    .card-text h3 { font-size: 1.1rem; font-weight: 600; line-height: 1.4; margin-bottom: 4px; }
-    .card-text p { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .icon-box::before {
+      content: ''; position: absolute; inset: 0;
+      background: var(--gradient-1);
+      opacity: 0; transition: 0.3s;
+    }
+    
+    .tool-card:hover .icon-box::before {
+      opacity: 1;
+    }
+    
+    .tool-card:hover .icon-box {
+      transform: rotate(-10deg) scale(1.1);
+      color: white;
+    }
+    
+    .icon-box i {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-text h3 { 
+      font-size: 1.2rem; 
+      font-weight: 600; 
+      line-height: 1.4; 
+      margin-bottom: 8px; 
+      background: linear-gradient(135deg, white, #e2e8f0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .card-text p { 
+      font-size: 0.85rem; 
+      color: var(--text-muted); 
+      text-transform: uppercase; 
+      letter-spacing: 0.5px; 
+      font-weight: 500;
+    }
     
     .arrow-icon {
       position: absolute; bottom: 24px; right: 24px;
       opacity: 0; transform: translateX(-10px); transition: 0.3s;
       color: var(--accent);
+      font-size: 1.2rem;
     }
-    .tool-card:hover .arrow-icon { opacity: 1; transform: translateX(0); }
+    .tool-card:hover .arrow-icon { 
+      opacity: 1; 
+      transform: translateX(0); 
+      animation: bounce 0.6s infinite;
+    }
+    
+    @keyframes bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(5px); }
+    }
 
     @keyframes cardFadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(30px) scale(0.9); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
-    /* Modals */
+    /* Double List Layout */
+    .double-list-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    
+    .list-section {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      padding: 24px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .list-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--glass-border);
+    }
+    
+    .list-header h3 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.3rem;
+      background: var(--gradient-2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    
+    .list-header i {
+      color: var(--accent);
+      font-size: 1.2rem;
+    }
+    
+    .list-items {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    
+    .list-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      transition: 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: white;
+    }
+    
+    .list-item:hover {
+      background: rgba(0, 212, 255, 0.1);
+      border-color: var(--accent);
+      transform: translateX(5px);
+    }
+    
+    .list-item-icon {
+      width: 40px; height: 40px;
+      background: var(--gradient-1);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; color: white;
+    }
+    
+    .list-item-content {
+      flex: 1;
+    }
+    
+    .list-item-title {
+      font-weight: 600; font-size: 0.95rem;
+      margin-bottom: 2px;
+    }
+    
+    .list-item-desc {
+      font-size: 0.8rem; color: var(--text-muted);
+    }
+
+    /* Enhanced Modals */
     .modal {
       display: none; position: fixed; inset: 0; z-index: 3000;
-      background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+      background: rgba(0,0,0,0.8); backdrop-filter: blur(10px);
       overflow-y: auto; padding: 20px;
     }
     .modal-content {
-      background: var(--bg-card);
+      background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       width: 95%; max-width: 650px;
       margin: 50px auto; padding: 30px;
@@ -302,10 +549,11 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.7);
       animation: modalSlide 0.3s ease-out;
       position: relative;
+      backdrop-filter: blur(20px);
     }
     @keyframes modalSlide { 
-      from { opacity: 0; transform: translateY(20px); } 
-      to { opacity: 1; transform: translateY(0); } 
+      from { opacity: 0; transform: translateY(20px) scale(0.9); } 
+      to { opacity: 1; transform: translateY(0) scale(1); } 
     }
     
     .modal-header { 
@@ -313,22 +561,42 @@
       margin-bottom: 25px; border-bottom: 1px solid var(--glass-border); 
       padding-bottom: 15px; 
     }
-    .modal-header h2 { font-family: 'Space Grotesk', sans-serif; display: flex; align-items: center; gap: 10px; }
-    .close-btn { font-size: 1.8rem; cursor: pointer; color: var(--text-muted); transition: 0.3s; }
-    .close-btn:hover { color: #ef4444; }
+    .modal-header h2 { 
+      font-family: 'Space Grotesk', sans-serif; 
+      display: flex; align-items: center; gap: 10px; 
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .close-btn { 
+      font-size: 1.8rem; cursor: pointer; color: var(--text-muted); 
+      transition: 0.3s; 
+      width: 40px; height: 40px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%;
+    }
+    .close-btn:hover { 
+      color: #ef4444; 
+      background: rgba(239, 68, 68, 0.1);
+      transform: rotate(90deg);
+    }
     
     textarea, .modal select, .modal input[type="text"], .modal input[type="password"] { 
-      width: 100%; background: #030712; border: 1px solid #374151; 
+      width: 100%; background: rgba(0,0,0,0.3); border: 1px solid #374151; 
       color: white; padding: 15px; border-radius: 12px; 
       font-family: 'Inter'; outline: none; transition: 0.3s;
     }
-    textarea:focus, .modal select:focus, .modal input:focus { border-color: var(--accent); }
+    textarea:focus, .modal select:focus, .modal input:focus { 
+      border-color: var(--accent); 
+      box-shadow: 0 0 0 3px var(--accent-glow);
+    }
     textarea { resize: vertical; min-height: 150px; }
 
-    .form-group { margin-bottom: 15px; }
+    .form-group { margin-bottom: 20px; }
     .form-group label { display: block; margin-bottom: 8px; color: var(--text-muted); font-size: 0.9rem; }
 
-    /* User Management */
+    /* Enhanced User Management */
     .user-mgmt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
     .user-mgmt-section h3 { 
       font-size: 1rem; margin-bottom: 15px; color: var(--accent); 
@@ -336,14 +604,14 @@
     }
     .permissions-list { 
       max-height: 200px; overflow-y: auto; 
-      background: #030712; padding: 10px; border-radius: 12px; 
+      background: rgba(0,0,0,0.3); padding: 10px; border-radius: 12px; 
       border: 1px solid #374151;
     }
     .permission-item {
       padding: 10px; display: flex; gap: 10px; align-items: center;
       border-bottom: 1px solid #1f2937; transition: 0.2s;
     }
-    .permission-item:hover { background: rgba(6, 182, 212, 0.05); }
+    .permission-item:hover { background: rgba(0, 212, 255, 0.05); }
     .permission-item:last-child { border-bottom: none; }
     .permission-item input[type="checkbox"] { 
       width: 18px; height: 18px; accent-color: var(--accent); cursor: pointer;
@@ -351,55 +619,89 @@
     .permission-item label { color: #9ca3af; cursor: pointer; font-size: 0.9rem; flex: 1; }
 
     .btn-danger {
-      background: #ef4444; color: white; border: none;
+      background: linear-gradient(135deg, #ef4444, #dc2626); color: white; border: none;
       padding: 12px 20px; border-radius: 10px; cursor: pointer;
       font-weight: 600; transition: 0.3s; width: 100%;
+      position: relative; overflow: hidden;
     }
-    .btn-danger:hover { background: #dc2626; }
+    .btn-danger:hover { 
+      background: linear-gradient(135deg, #dc2626, #b91c1c); 
+      transform: translateY(-2px);
+    }
     .btn-danger:disabled { opacity: 0.5; cursor: not-allowed; }
 
     .message-box {
       padding: 12px; border-radius: 10px; text-align: center;
       margin-bottom: 20px; font-weight: 500; display: none;
     }
-    .message-box.success { background: rgba(74, 222, 128, 0.1); color: #4ade80; border: 1px solid rgba(74, 222, 128, 0.3); }
-    .message-box.error { background: rgba(248, 113, 113, 0.1); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.3); }
+    .message-box.success { 
+      background: rgba(74, 222, 128, 0.1); 
+      color: #4ade80; 
+      border: 1px solid rgba(74, 222, 128, 0.3); 
+    }
+    .message-box.error { 
+      background: rgba(248, 113, 113, 0.1); 
+      color: #f87171; 
+      border: 1px solid rgba(248, 113, 113, 0.3); 
+    }
 
-    /* Profile Modal */
+    /* Enhanced Profile Modal */
     .profile-card {
       text-align: center; padding: 20px;
     }
     .profile-card img {
-      width: 100px; height: 100px; border-radius: 50%;
+      width: 120px; height: 120px; border-radius: 50%;
       border: 3px solid var(--accent); margin-bottom: 15px;
+      box-shadow: 0 0 30px var(--accent-glow);
+      transition: 0.3s;
     }
-    .profile-card h3 { font-size: 1.5rem; margin-bottom: 5px; }
+    .profile-card img:hover {
+      transform: scale(1.05);
+    }
+    .profile-card h3 { font-size: 1.8rem; margin-bottom: 5px; }
     .profile-card p { color: var(--text-muted); }
     .profile-stats {
       display: flex; justify-content: center; gap: 30px; margin-top: 20px;
       padding-top: 20px; border-top: 1px solid var(--glass-border);
     }
     .stat-item { text-align: center; }
-    .stat-item .number { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
+    .stat-item .number { 
+      font-size: 1.8rem; 
+      font-weight: 700; 
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
     .stat-item .label { font-size: 0.8rem; color: var(--text-muted); }
 
-    /* No Results */
+    /* Enhanced No Results */
     .no-results {
       grid-column: 1 / -1; text-align: center; padding: 60px 20px;
       color: var(--text-muted);
     }
-    .no-results i { font-size: 3rem; margin-bottom: 15px; opacity: 0.5; }
-    .no-results p { font-size: 1.1rem; }
+    .no-results i { font-size: 4rem; margin-bottom: 20px; opacity: 0.5; animation: float 3s infinite; }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    .no-results p { font-size: 1.2rem; }
 
     /* Mobile Menu Toggle */
     #menuToggle { 
       display: none; background: none; border: none; 
       color: white; font-size: 1.5rem; cursor: pointer; margin-right: 15px; 
+      transition: 0.3s;
+    }
+    #menuToggle:hover {
+      color: var(--accent);
+      transform: scale(1.1);
     }
     
     .overlay {
       display: none; position: fixed; inset: 0;
       background: rgba(0,0,0,0.5); z-index: 99;
+      backdrop-filter: blur(5px);
     }
     .overlay.active { display: block; }
 
@@ -414,6 +716,7 @@
       .main-content { margin-left: 0; padding: 20px; }
       .header-bar { flex-direction: column; align-items: flex-start; }
       .user-mgmt-grid { grid-template-columns: 1fr; }
+      .double-list-container { grid-template-columns: 1fr; }
     }
 
     @media (max-width: 480px) {
@@ -426,17 +729,17 @@
 </head>
 <body>
 
-  <!-- Preloader -->
+  <!-- Enhanced Preloader -->
   <div id="preloader"><div class="loader"></div></div>
 
-  <!-- Login Page -->
+  <!-- Enhanced Login Page -->
   <div class="login-container" id="loginContainer">
     <div class="login-box">
       <div class="logo-glow">
         <img src="https://i.postimg.cc/sXPJH9xd/Screenshot-2025-06-19-143219.png" alt="Logo">
       </div>
       <h1>Amit Chaudhary</h1>
-      <p>Radnik Hub | Secure Login</p>
+      <p>Amit Chaudhary | Secure Login</p>
       
       <div style="margin-top: 30px;">
         <div class="input-field">
@@ -456,21 +759,23 @@
     </div>
   </div>
 
-  <!-- Main Dashboard -->
+  <!-- Enhanced Main Dashboard -->
   <div class="portal-view" id="portalView">
     <div class="overlay" id="overlay"></div>
     
-    <!-- Sidebar -->
+    <!-- Enhanced Sidebar -->
     <nav class="sidebar" id="sidebar">
       <div class="brand-logo">
         <i class="fas fa-cube"></i>
-        <span>Radnik Hub</span>
+        <span>Amit Chaudhary</span>
       </div>
       
       <ul class="nav-links">
         <li class="nav-item"><a id="dashboardLink" class="active"><i class="fas fa-th-large"></i> Dashboard</a></li>
         <li class="nav-item"><a id="myProfileBtnSidebar"><i class="fas fa-user-astronaut"></i> Profile</a></li>
         <li class="nav-item"><a id="notepadBtnSidebar"><i class="fas fa-sticky-note"></i> Notes</a></li>
+        <li class="nav-item"><a id="quickToolsBtnSidebar"><i class="fas fa-bolt"></i> Quick Tools</a></li>
+        <li class="nav-item"><a id="analyticsBtnSidebar"><i class="fas fa-chart-line"></i> Analytics</a></li>
         <li class="nav-item admin-only" style="display:none;"><a id="userManagementBtnSidebar"><i class="fas fa-users-cog"></i> Users</a></li>
         <li class="nav-item admin-only" style="display:none;"><a id="portalSettingsBtnSidebar"><i class="fas fa-sliders-h"></i> Settings</a></li>
       </ul>
@@ -484,7 +789,7 @@
       </div>
     </nav>
 
-    <!-- Content -->
+    <!-- Enhanced Content -->
     <main class="main-content" id="mainContent">
       <header class="header-bar" id="mainHeader">
         <div style="display:flex; align-items:center;">
@@ -497,7 +802,7 @@
         <div class="clock-badge" id="clock">00:00:00</div>
       </header>
       
-      <!-- Search Toolbar -->
+      <!-- Enhanced Search Toolbar -->
       <div class="toolbar">
         <div class="search-wrap">
           <i class="fas fa-search"></i>
@@ -508,12 +813,48 @@
         </select>
       </div>
       
-      <!-- The Grid -->
+      <!-- Quick Tools Section -->
+      <div class="double-list-container" id="quickToolsSection" style="display:none;">
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-bolt"></i>
+            <h3>Quick Actions</h3>
+          </div>
+          <div class="list-items" id="quickActionsList"></div>
+        </div>
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-star"></i>
+            <h3>Favorites</h3>
+          </div>
+          <div class="list-items" id="favoritesList"></div>
+        </div>
+      </div>
+
+      <!-- Analytics Section -->
+      <div class="double-list-container" id="analyticsSection" style="display:none;">
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-chart-bar"></i>
+            <h3>Sales Analytics</h3>
+          </div>
+          <div class="list-items" id="salesAnalyticsList"></div>
+        </div>
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-chart-line"></i>
+            <h3>Performance Metrics</h3>
+          </div>
+          <div class="list-items" id="performanceMetricsList"></div>
+        </div>
+      </div>
+      
+      <!-- Enhanced Grid -->
       <div class="grid-container" id="buttonContainer"></div>
     </main>
   </div>
   
-  <!-- Profile Modal -->
+  <!-- Enhanced Profile Modal -->
   <div id="userProfileModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -538,7 +879,7 @@
     </div>
   </div>
 
-  <!-- Notepad Modal -->
+  <!-- Enhanced Notepad Modal -->
   <div id="notepadModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -552,7 +893,59 @@
     </div>
   </div>
 
-  <!-- User Management Modal -->
+  <!-- Quick Tools Modal -->
+  <div id="quickToolsModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-bolt"></i> Quick Tools</h2>
+        <span class="close-btn">&times;</span>
+      </div>
+      <div class="double-list-container">
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-calculator"></i>
+            <h3>Calculators</h3>
+          </div>
+          <div class="list-items" id="calculatorsList"></div>
+        </div>
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-file-alt"></i>
+            <h3>Document Tools</h3>
+          </div>
+          <div class="list-items" id="documentToolsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Analytics Dashboard Modal -->
+  <div id="analyticsDashboardModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2><i class="fas fa-chart-line"></i> Analytics Dashboard</h2>
+        <span class="close-btn">&times;</span>
+      </div>
+      <div class="double-list-container">
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-chart-pie"></i>
+            <h3>Sales Reports</h3>
+          </div>
+          <div class="list-items" id="salesReportsList"></div>
+        </div>
+        <div class="list-section">
+          <div class="list-header">
+            <i class="fas fa-chart-area"></i>
+            <h3>Performance Analytics</h3>
+          </div>
+          <div class="list-items" id="performanceAnalyticsList"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Enhanced User Management Modal -->
   <div id="userManagementModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -597,7 +990,7 @@
     </div>
   </div>
 
-  <!-- Settings Modal -->
+  <!-- Enhanced Settings Modal -->
   <div id="portalSettingsModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -615,56 +1008,109 @@
     // Constants
     const USERS_KEY = 'radnikPortalUsers_v10';
     const PERMISSIONS_KEY = 'radnikPortalPermissions_v10';
+    const FAVORITES_KEY = 'radnikPortalFavorites_v10';
     let currentUser = null;
     let allButtons = [];
     let filteredButtons = [];
     let sessionStartTime = Date.now();
 
-    // Button Data
+    // Enhanced Button Data with More Tools
     const ALL_BUTTONS_DATA = [
+      // Finance Tools
       { id: "noida-tax-invoice", href: "https://docs.google.com/spreadsheets/d/1p1LreGjZFEWSY3qfkbGaWGymDa_3kzwucDH3xHoPzqU/edit", icon: "fas fa-file-invoice-dollar", text: "Noida Tax Invoice Log", category: "Finance" },
       { id: "186-tax-invoice", href: "https://docs.google.com/spreadsheets/d/1clgoSGc3BF6u25v-cumlJMqrCOZYSydWJ_xSAOpe0FE/edit", icon: "fas fa-receipt", text: "186 Tax Invoice Log", category: "Finance" },
-      { id: "eway-bill", href: "https://192.168.20.7/vgeinvoice/LoginPage.aspx", icon: "fas fa-truck-fast", text: "E-Way Bill Dashboard", category: "Logistics" },
-      { id: "merge-pdf", href: "https://smallpdf.com/merge-pdf", icon: "fas fa-file-pdf", text: "Merge PDF", category: "Tools" },
-      { id: "app-365", href: "https://www.office.com/apps/?auth=2", icon: "fab fa-microsoft", text: "Office 365 Apps", category: "Tools" },
       { id: "chargeback-form", href: "https://docs.google.com/forms/d/e/1FAIpQLSfQf5LaxGX8lLr4nN7hPmrL3mpuaFv1uzYMTaIb02IcGFHp5g/viewform", icon: "fas fa-undo-alt", text: "Chargeback Form", category: "Finance" },
-      { id: "daily-sale-186", href: "https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B5DE750E6-1A38-4B42-B02D-44A3D95B2D14%7D&file=Book%206.xlsx&action=editnew", icon: "fas fa-calendar-day", text: "Daily Sale 186", category: "Sales" },
-      { id: "dsec16-sale", href: "https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B866121D0-C91C-4F09-9F0B-909FBB0C2324%7D&file=DAILY%20SALE%20ENTERY%20NOIDA.xlsx&action=default", icon: "fas fa-cash-register", text: "D-S-E-C16 (Noida Sale)", category: "Sales" },
-      { id: "noida-order-entry", href: "https://docs.google.com/spreadsheets/d/11RCeL6pUqN8khww5sY_iA_t-mNgrzwQNvV-bRtLKA9s/edit", icon: "fas fa-clipboard-check", text: "Noida Order Entry", category: "Sales" },
       { id: "chargeback-data", href: "https://docs.google.com/spreadsheets/d/1V92jsBq9iTbYnaoaIdmYdbYc9uoFvaimxaYScnHLD7w/edit", icon: "fas fa-hand-holding-usd", text: "Chargeback Data", category: "Finance" },
-      { id: "live-graph-quince", href: "https://docs.google.com/spreadsheets/d/17XLwAmZxvmxOaB-DzPIBjuGmb3u_Zxz9_1aGn175yeE/edit", icon: "fas fa-chart-line", text: "Live Graph Quince", category: "Analytics" },
-      { id: "quince-2024-sale", href: "https://docs.google.com/spreadsheets/d/1c4VbDj3CCp_Lr2MCpoJXmlp2K9qP6L3pIA0eZq52PDM/edit", icon: "fas fa-database", text: "QUINCE 2024 SALE DATA", category: "Sales" },
-      { id: "maersk-stock-data", href: "https://docs.google.com/spreadsheets/d/1sehWq-1kvNwl0qZWOpkhapuk9mam0FjKAoJvHMV9U5o/edit", icon: "fas fa-ship", text: "MAERSK Stock Data", category: "Logistics" },
-      { id: "quince-2025-pos", href: "https://docs.google.com/spreadsheets/d/17RWCZ62o2nRvMgZjfi_fZ6AyBQ0YmHNoIp-CCRSxJjg/edit", icon: "fas fa-shopping-cart", text: "QUINCE 2025 POS DATA", category: "Sales" },
       { id: "quince-invoice-summary", href: "https://docs.google.com/spreadsheets/d/1PnetSLtEPxot9N3KlB_ydbzNccAF5qMnDMRmYLo6ZLs/edit", icon: "fas fa-file-invoice", text: "Quince Invoice Summary", category: "Finance" },
-      { id: "ggn-sales-overview", href: "https://docs.google.com/spreadsheets/d/1riS3U9aPW7s8SQmqaZkGrb2fHVEdDbJdHxwdygaeKXc/edit", icon: "fas fa-city", text: "Gurugram Sales Overview", category: "Sales" },
-      { id: "noida-sales-overview", href: "https://docs.google.com/spreadsheets/d/15Xma9DRkRectWPqUKDQlr5yZQMtCfQ2Bxa_J5vU-Es0/edit", icon: "fas fa-building-user", text: "Noida Sales Overview", category: "Sales" },
-      { id: "anish-sir-site", href: "https://sites.google.com/view/bossanishji/", icon: "fas fa-user-tie", text: "Anish Sir's Site", category: "Resources" },
-      { id: "amit-chaudhary-site", href: "https://sites.google.com/view/radnikaks/home", icon: "fas fa-user-astronaut", text: "Amit Chaudhary's Site", category: "Resources" },
-      { id: "186-qs-view", href: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_ihmuGBmPjY_SF6zXQe825cL0i3O9FjTod0gVVgjvc9uSU1HrQsSxcGSVRLAUrJA8NjruJPKs7ezi/pubhtml", icon: "fas fa-chart-pie", text: "186-Q-S-VIEW", category: "Analytics" },
-      { id: "c16-qs-view", href: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1MRNcqWJsXyp4gKAq00N2qKmjoNgXkwVCmxH2lBeeitlz0kNfSiY-z1sNK2JTciPN6mzUpF9-G36Z/pubhtml", icon: "fas fa-chart-area", text: "C16-Q-S-VIEW", category: "Analytics" },
-      { id: "c16-import-details", href: "https://docs.google.com/spreadsheets/d/1m3q0x9wKoM7Q7EBSCvpCTozbtB0-73xmgOO_Yx0EBAg/edit", icon: "fas fa-file-import", text: "C16-IMPORT DETAILS", category: "Logistics" },
-      { id: "ggn-prep-2025", href: "https://docs.google.com/spreadsheets/d/1LZa3JvfEdt-9cdQkEmsEluwurMoDzmsXIyFWNpAcnfs/edit", icon: "fas fa-tasks", text: "GGN-PREPEMENT 2025", category: "Operations" },
-      { id: "quince-hk", href: "https://docs.google.com/spreadsheets/d/1l2CnQrl9YEfOFAoiqj82DYwJ-zQWYqCX5HuL87ffRlw/edit", icon: "fas fa-globe-asia", text: "Quince Hong Kong", category: "International" },
-      { id: "projection-vs-sales", href: "https://docs.google.com/spreadsheets/d/1QzAuxxuLUz60iWbdiVGzAFDjXY0RSZIda_0VOhbloEU/edit", icon: "fas fa-bullseye", text: "Projection VS Sales Report", category: "Analytics" },
-      { id: "quince-order-chart", href: "https://docs.google.com/spreadsheets/d/1JFI22zsy2Pa5d2lq4dcEeCZIg7rqFaBMYPzniBdlhMc/edit", icon: "fas fa-list-ol", text: "QUINCE ORDER CHART", category: "Sales" },
-      { id: "projection-vs-actual", href: "https://docs.google.com/spreadsheets/d/1f7bODkOgwvN_i-nWItzn_67IZv0EqXxAqr2v-ZRQ8Vg/edit", icon: "fas fa-project-diagram", text: "PROJECTION VS ACTUAL", category: "Analytics" },
-      { id: "quince-sale-hub", href: "https://docs.google.com/spreadsheets/d/1_5-nGWZmyI5WkTSp6muKe7uEhel7DoAzX1oisoBz1Xw/edit", icon: "fas fa-sitemap", text: "Quince Sale All Data Hub", category: "Sales" },
-      { id: "po-wise-qty", href: "https://docs.google.com/spreadsheets/d/1bQqiCaiQ_JGN_B-415ftvVgoH9MmaF9A4ydZkkYXS-Q/edit", icon: "fas fa-exchange-alt", text: "PO Wise Qty Send/Sale", category: "Operations" },
-      { id: "sales-perf-ggn", href: "https://amitaadhya.github.io/Quincesaleggn/", icon: "fas fa-tachometer-alt", text: "Sales Perf. Dashboard-GGN", category: "Analytics" },
-      { id: "sales-perf-noida", href: "https://amitaadhya.github.io/noidaquincesale/", icon: "fas fa-chart-bar", text: "NOIDA-Sales Perf. Dash.", category: "Analytics" },
-      { id: "quince-style-value", href: "https://docs.google.com/spreadsheets/d/1GQucVQMxZanFgg27PGDpflR49a6DksezH4Pby2uFu4A/edit", icon: "fas fa-dollar-sign", text: "QUINCE Style Name Wise Value", category: "Analytics" },
-      { id: "quince-invoice-summary-2", href: "https://docs.google.com/spreadsheets/d/1PnetSLtEPxot9N3KlB_ydbzNccAF5qMnDMRmYLo6ZLs/edit", icon: "fas fa-file-alt", text: "Quince_Invoice Summary", category: "Finance" },
-      { id: "style-analyzer-ggn", href: "https://script.google.com/macros/s/AKfycbwMLk_TuKGtxzLFMxIoLVONqYMS5RRCf3cBqS9zDw/dev", icon: "fas fa-search-dollar", text: "Quince_ Style Analyzer_GGN", category: "Analytics" },
-      { id: "style-analyzer-noida", href: "https://script.google.com/macros/s/AKfycbzljj_8OxdNR2AtJqxfTD_oB11YGTdF0MGulyLCvpE/dev", icon: "fas fa-search-location", text: "Quince_ Style Analyzer_NOIDA", category: "Analytics" },
-      { id: "quince-shipping-data", href: "https://docs.google.com/spreadsheets/d/1EfFlN6kb_q08R3cWQT_LJfRoSCKvGpS_JkJGZaUMA34/edit", icon: "fas fa-globe-americas", text: "Quince Mexico & Canada Ship Data", category: "International" },
-      { id: "useful-websites", href: "https://www.notion.so/Welcome-to-Amit-Chaudhary-22a7a00d4f9780fe8865e67bf16d2430", icon: "fas fa-star", text: "Most Useful Websites (AKS!)", category: "Resources" },
       { id: "ggn-revenue-chargeback", href: "https://script.google.com/macros/s/AKfycbw6qke8xOhYaqaxcjFOgp-_wtWAwXEAfVqJA8e6-A/dev", icon: "fas fa-file-excel", text: "GGN Revenue & Chargeback Summary", category: "Finance" },
       { id: "noida-revenue-chargeback", href: "https://script.google.com/macros/s/AKfycbw1Dpw--Ar3rNg3IgPn3e32gpUODmv_O12053XHUYc/dev", icon: "far fa-file-excel", text: "NOIDA Revenue & Chargeback Summary", category: "Finance" },
       { id: "payment-management", href: "https://script.google.com/macros/s/AKfycbwEj1e1d0DfYqaTPbDarQTTYiMaiRWOodd5Cu6x4Sc/dev", icon: "fas fa-credit-card", text: "Radnik Q Payment Management", category: "Finance" },
+
+      // Sales Tools
+      { id: "daily-sale-186", href: "https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B5DE750E6-1A38-4B42-B02D-44A3D95B2D14%7D&file=Book%206.xlsx&action=editnew", icon: "fas fa-calendar-day", text: "Daily Sale 186", category: "Sales" },
+      { id: "dsec16-sale", href: "https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B866121D0-C91C-4F09-9F0B-909FBB0C2324%7D&file=DAILY%20SALE%20ENTERY%20NOIDA.xlsx&action=default", icon: "fas fa-cash-register", text: "D-S-E-C16 (Noida Sale)", category: "Sales" },
+      { id: "noida-order-entry", href: "https://docs.google.com/spreadsheets/d/11RCeL6pUqN8khww5sY_iA_t-mNgrzwQNvV-bRtLKA9s/edit", icon: "fas fa-clipboard-check", text: "Noida Order Entry", category: "Sales" },
+      { id: "quince-2024-sale", href: "https://docs.google.com/spreadsheets/d/1c4VbDj3CCp_Lr2MCpoJXmlp2K9qP6L3pIA0eZq52PDM/edit", icon: "fas fa-database", text: "QUINCE 2024 SALE DATA", category: "Sales" },
+      { id: "quince-2025-pos", href: "https://docs.google.com/spreadsheets/d/17RWCZ62o2nRvMgZjfi_fZ6AyBQ0YmHNoIp-CCRSxJjg/edit", icon: "fas fa-shopping-cart", text: "QUINCE 2025 POS DATA", category: "Sales" },
+      { id: "ggn-sales-overview", href: "https://docs.google.com/spreadsheets/d/1riS3U9aPW7s8SQmqaZkGrb2fHVEdDbJdHxwdygaeKXc/edit", icon: "fas fa-city", text: "Gurugram Sales Overview", category: "Sales" },
+      { id: "noida-sales-overview", href: "https://docs.google.com/spreadsheets/d/15Xma9DRkRectWPqUKDQlr5yZQMtCfQ2Bxa_J5vU-Es0/edit", icon: "fas fa-building-user", text: "Noida Sales Overview", category: "Sales" },
+      { id: "quince-order-chart", href: "https://docs.google.com/spreadsheets/d/1JFI22zsy2Pa5d2lq4dcEeCZIg7rqFaBMYPzniBdlhMc/edit", icon: "fas fa-list-ol", text: "QUINCE ORDER CHART", category: "Sales" },
+      { id: "quince-sale-hub", href: "https://docs.google.com/spreadsheets/d/1_5-nGWZmyI5WkTSp6muKe7uEhel7DoAzX1oisoBz1Xw/edit", icon: "fas fa-sitemap", text: "Quince Sale All Data Hub", category: "Sales" },
+      { id: "quince-style-value", href: "https://docs.google.com/spreadsheets/d/1GQucVQMxZanFgg27PGDpflR49a6DksezH4Pby2uFu4A/edit", icon: "fas fa-dollar-sign", text: "QUINCE Style Name Wise Value", category: "Sales" },
+
+      // Analytics Tools
+      { id: "live-graph-quince", href: "https://docs.google.com/spreadsheets/d/17XLwAmZxvmxOaB-DzPIBjuGmb3u_Zxz9_1aGn175yeE/edit", icon: "fas fa-chart-line", text: "Live Graph Quince", category: "Analytics" },
+      { id: "186-qs-view", href: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_ihmuGBmPjY_SF6zXQe825cL0i3O9FjTod0gVVgjvc9uSU1HrQsSxcGSVRLAUrJA8NjruJPKs7ezi/pubhtml", icon: "fas fa-chart-pie", text: "186-Q-S-VIEW", category: "Analytics" },
+      { id: "c16-qs-view", href: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1MRNcqWJsXyp4gKAq00N2qKmjoNgXkwVCmxH2lBeeitlz0kNfSiY-z1sNK2JTciPN6mzUpF9-G36Z/pubhtml", icon: "fas fa-chart-area", text: "C16-Q-S-VIEW", category: "Analytics" },
+      { id: "projection-vs-sales", href: "https://docs.google.com/spreadsheets/d/1QzAuxxuLUz60iWbdiVGzAFDjXY0RSZIda_0VOhbloEU/edit", icon: "fas fa-bullseye", text: "Projection VS Sales Report", category: "Analytics" },
+      { id: "projection-vs-actual", href: "https://docs.google.com/spreadsheets/d/1f7bODkOgwvN_i-nWItzn_67IZv0EqXxAqr2v-ZRQ8Vg/edit", icon: "fas fa-project-diagram", text: "PROJECTION VS ACTUAL", category: "Analytics" },
+      { id: "sales-perf-ggn", href: "https://amitaadhya.github.io/Quincesaleggn/", icon: "fas fa-tachometer-alt", text: "Sales Perf. Dashboard-GGN", category: "Analytics" },
+      { id: "sales-perf-noida", href: "https://amitaadhya.github.io/noidaquincesale/", icon: "fas fa-chart-bar", text: "NOIDA-Sales Perf. Dash.", category: "Analytics" },
+      { id: "style-analyzer-ggn", href: "https://script.google.com/macros/s/AKfycbwMLk_TuKGtxzLFMxIoLVONqYMS5RRCf3cBqS9zDw/dev", icon: "fas fa-search-dollar", text: "Quince_ Style Analyzer_GGN", category: "Analytics" },
+      { id: "style-analyzer-noida", href: "https://script.google.com/macros/s/AKfycbzljj_8OxdNR2AtJqxfTD_oB11YGTdF0MGulyLCvpE/dev", icon: "fas fa-search-location", text: "Quince_ Style Analyzer_NOIDA", category: "Analytics" },
+
+      // Logistics Tools
+      { id: "eway-bill", href: "https://192.168.20.7/vgeinvoice/LoginPage.aspx", icon: "fas fa-truck-fast", text: "E-Way Bill Dashboard", category: "Logistics" },
+      { id: "maersk-stock-data", href: "https://docs.google.com/spreadsheets/d/1sehWq-1kvNwl0qZWOpkhapuk9mam0FjKAoJvHMV9U5o/edit", icon: "fas fa-ship", text: "MAERSK Stock Data", category: "Logistics" },
+      { id: "c16-import-details", href: "https://docs.google.com/spreadsheets/d/1m3q0x9wKoM7Q7EBSCvpCTozbtB0-73xmgOO_Yx0EBAg/edit", icon: "fas fa-file-import", text: "C16-IMPORT DETAILS", category: "Logistics" },
+      { id: "quince-shipping-data", href: "https://docs.google.com/spreadsheets/d/1EfFlN6kb_q08R3cWQT_LJfRoSCKvGpS_JkJGZaUMA34/edit", icon: "fas fa-globe-americas", text: "Quince Mexico & Canada Ship Data", category: "Logistics" },
+      { id: "po-wise-qty", href: "https://docs.google.com/spreadsheets/d/1bQqiCaiQ_JGN_B-415ftvVgoH9MmaF9A4ydZkkYXS-Q/edit", icon: "fas fa-exchange-alt", text: "PO Wise Qty Send/Sale", category: "Logistics" },
+      { id: "ggn-prep-2025", href: "https://docs.google.com/spreadsheets/d/1LZa3JvfEdt-9cdQkEmsEluwurMoDzmsXIyFWNpAcnfs/edit", icon: "fas fa-tasks", text: "GGN-PREPEMENT 2025", category: "Logistics" },
+
+      // Operations Tools
       { id: "quince-po-records", href: "https://docs.google.com/spreadsheets/d/1pcb48pdm_kwASlmRACu1_E3s1_DHcofF5uOx6h4mLXY/edit", icon: "fas fa-archive", text: "QUINCE PO RECORDS", category: "Operations" },
       { id: "ggn-quince-po-records", href: "https://docs.google.com/spreadsheets/d/1SA8SPgEQJzf-oCBDs6vbIcHdfau12cAoms5hsAANRAA/edit?gid=0#gid=0", icon: "fas fa-archive", text: "GGN QUINCE PO RECORDS", category: "Operations" },
       { id: "noida-quince-po-records", href: "https://docs.google.com/spreadsheets/d/1Gt6pzKGkboWUK-Ijbp5OeFjYuvq_JD22xip_D4cDYxg/edit?gid=0#gid=0", icon: "fas fa-archive", text: "NOIDA QUINCE PO RECORDS", category: "Operations" },
+
+      // International Tools
+      { id: "quince-hk", href: "https://docs.google.com/spreadsheets/d/1l2CnQrl9YEfOFAoiqj82DYwJ-zQWYqCX5HuL87ffRlw/edit", icon: "fas fa-globe-asia", text: "Quince Hong Kong", category: "International" },
+
+      // Productivity Tools
+      { id: "merge-pdf", href: "https://smallpdf.com/merge-pdf", icon: "fas fa-file-pdf", text: "Merge PDF", category: "Tools" },
+      { id: "app-365", href: "https://www.office.com/apps/?auth=2", icon: "fab fa-microsoft", text: "Office 365 Apps", category: "Tools" },
+      { id: "useful-websites", href: "https://www.notion.so/Welcome-to-Amit-Chaudhary-22a7a00d4f9780fe8865e67bf16d2430", icon: "fas fa-star", text: "Most Useful Websites (AKS!)", category: "Tools" },
+
+      // Resource Tools
+      { id: "anish-sir-site", href: "https://sites.google.com/view/bossanishji/", icon: "fas fa-user-tie", text: "Anish Sir's Site", category: "Resources" },
+      { id: "amit-chaudhary-site", href: "https://sites.google.com/view/radnikaks/home", icon: "fas fa-user-astronaut", text: "Amit Chaudhary's Site", category: "Resources" },
+
+      // Additional Productivity Tools
+      { id: "google-drive", href: "https://drive.google.com", icon: "fab fa-google-drive", text: "Google Drive", category: "Tools" },
+      { id: "trello-board", href: "https://trello.com", icon: "fab fa-trello", text: "Trello Boards", category: "Tools" },
+      { id: "slack-workspace", href: "https://slack.com", icon: "fab fa-slack", text: "Slack Workspace", category: "Tools" },
+      { id: "zoom-meetings", href: "https://zoom.us", icon: "fas fa-video", text: "Zoom Meetings", category: "Tools" },
+      { id: "calculator-online", href: "https://www.calculator.net", icon: "fas fa-calculator", text: "Online Calculator", category: "Tools" },
+      { id: "time-tracker", href: "https://toggl.com", icon: "fas fa-clock", text: "Time Tracker", category: "Tools" },
+      { id: "password-generator", href: "https://passwordsgenerator.net", icon: "fas fa-key", text: "Password Generator", category: "Tools" },
+      { id: "qr-generator", href: "https://www.qr-code-generator.com", icon: "fas fa-qrcode", text: "QR Code Generator", category: "Tools" },
+      { id: "color-picker", href: "https://htmlcolorcodes.com", icon: "fas fa-palette", text: "Color Picker", category: "Tools" },
+      { id: "image-compressor", href: "https://tinypng.com", icon: "fas fa-compress", text: "Image Compressor", category: "Tools" },
+      { id: "pdf-converter", href: "https://pdfcandy.com", icon: "fas fa-file-export", text: "PDF Converter", category: "Tools" },
+      { id: "screen-recorder", href: "https://www.loom.com", icon: "fas fa-record-vinyl", text: "Screen Recorder", category: "Tools" },
+      { id: "note-taking", href: "https://notion.so", icon: "fas fa-sticky-note", text: "Note Taking", category: "Tools" },
+      { id: "task-manager", href: "https://todoist.com", icon: "fas fa-tasks", text: "Task Manager", category: "Tools" },
+      { id: "file-converter", href: "https://convertio.co", icon: "fas fa-exchange-alt", text: "File Converter", category: "Tools" },
+      { id: "website-screenshot", href: "https://screenshot.guru", icon: "fas fa-camera", text: "Website Screenshot", category: "Tools" }
+    ];
+
+    // Quick Actions Data
+    const QUICK_ACTIONS_DATA = [
+      { id: "quick-calc", href: "https://www.calculator.net", icon: "fas fa-calculator", text: "Quick Calculator", desc: "Basic calculations" },
+      { id: "quick-notes", href: "#", icon: "fas fa-sticky-note", text: "Quick Notes", desc: "Open notepad" },
+      { id: "quick-scan", href: "https://www.qr-code-generator.com", icon: "fas fa-qrcode", text: "QR Generator", desc: "Create QR codes" },
+      { id: "quick-convert", href: "https://pdfcandy.com", icon: "fas fa-file-export", text: "PDF Tools", desc: "PDF conversion" },
+      { id: "quick-time", href: "https://toggl.com", icon: "fas fa-clock", text: "Time Tracker", desc: "Track work hours" },
+      { id: "quick-password", href: "https://passwordsgenerator.net", icon: "fas fa-key", text: "Password Gen", desc: "Generate passwords" }
+    ];
+
+    // Analytics Tools Data
+    const ANALYTICS_TOOLS_DATA = [
+      { id: "sales-today", href: "#", icon: "fas fa-calendar-day", text: "Today's Sales", desc: "Real-time sales data" },
+      { id: "sales-weekly", href: "#", icon: "fas fa-calendar-week", text: "Weekly Report", desc: "Weekly sales summary" },
+      { id: "sales-monthly", href: "#", icon: "fas fa-calendar-alt", text: "Monthly Analytics", desc: "Monthly performance" },
+      { id: "inventory-status", href: "#", icon: "fas fa-warehouse", text: "Inventory Status", desc: "Stock levels" },
+      { id: "order-tracking", href: "#", icon: "fas fa-shipping-fast", text: "Order Tracking", desc: "Track shipments" },
+      { id: "customer-analytics", href: "#", icon: "fas fa-users", text: "Customer Analytics", desc: "Customer insights" }
     ];
     
     // Utility Functions
@@ -705,10 +1151,12 @@
         'errorMessage', 'sidebar', 'mainContent', 'menuToggle', 'logoutLink', 'welcomeMessage', 
         'userProfile', 'userNameText', 'userProfilePic', 'mainHeader', 'buttonContainer', 
         'myProfileBtnSidebar', 'notepadBtnSidebar', 'userManagementBtnSidebar', 'portalSettingsBtnSidebar', 
+        'quickToolsBtnSidebar', 'analyticsBtnSidebar', 'quickToolsSection', 'analyticsSection',
         'userProfileModal', 'notepadModal', 'userManagementModal', 'portalSettingsModal', 
-        'saveNotepadBtn', 'notepadTextarea', 'createUserBtn', 'newUsername', 'newPassword', 
-        'selectUserForPermissions', 'permissionsContainer', 'permissionsList', 'savePermissionsBtn', 
-        'deleteUserBtn', 'userManagementMessage', 'searchInput', 'categoryFilter', 'overlay',
+        'quickToolsModal', 'analyticsDashboardModal', 'saveNotepadBtn', 'notepadTextarea', 
+        'createUserBtn', 'newUsername', 'newPassword', 'selectUserForPermissions', 
+        'permissionsContainer', 'permissionsList', 'savePermissionsBtn', 'deleteUserBtn', 
+        'userManagementMessage', 'searchInput', 'categoryFilter', 'overlay',
         'profileModalPic', 'profileModalName', 'profileModalRole', 'toolsCount', 'sessionTime'];
       ids.forEach(id => dom[id] = document.getElementById(id));
       dom.closeBtns = document.querySelectorAll('.close-btn');
@@ -730,6 +1178,8 @@
       dom.notepadBtnSidebar.addEventListener('click', () => { openNotepad(); closeSidebar(); });
       dom.userManagementBtnSidebar.addEventListener('click', () => { openUserManagement(); closeSidebar(); });
       dom.portalSettingsBtnSidebar.addEventListener('click', () => { openModal('portalSettingsModal'); closeSidebar(); });
+      dom.quickToolsBtnSidebar.addEventListener('click', () => { openQuickTools(); closeSidebar(); });
+      dom.analyticsBtnSidebar.addEventListener('click', () => { openAnalytics(); closeSidebar(); });
       
       dom.closeBtns.forEach(btn => btn.addEventListener('click', (e) => e.target.closest('.modal').style.display = 'none'));
       
@@ -808,6 +1258,8 @@
       });
       
       populateButtons();
+      populateQuickActions();
+      populateAnalyticsTools();
     }
     
     function showLoginMessage(msg) {
@@ -846,6 +1298,97 @@
       
       renderButtons();
     }
+
+    function populateQuickActions() {
+      const quickActionsList = document.getElementById('quickActionsList');
+      const favoritesList = document.getElementById('favoritesList');
+      
+      // Populate Quick Actions
+      quickActionsList.innerHTML = '';
+      QUICK_ACTIONS_DATA.forEach(action => {
+        const item = createListItem(action);
+        quickActionsList.appendChild(item);
+      });
+
+      // Populate Favorites
+      favoritesList.innerHTML = '';
+      const favorites = getFromLocalStorage(FAVORITES_KEY, {})[currentUser.username] || [];
+      const favoriteItems = ALL_BUTTONS_DATA.filter(btn => favorites.includes(btn.id));
+      
+      if (favoriteItems.length === 0) {
+        favoritesList.innerHTML = '<div class="no-results" style="padding: 20px;"><i class="fas fa-star"></i><p>No favorites added yet</p></div>';
+      } else {
+        favoriteItems.forEach(item => {
+          const listItem = createListItem({
+            id: item.id,
+            href: item.href,
+            icon: item.icon,
+            text: item.text,
+            desc: item.category
+          });
+          favoritesList.appendChild(listItem);
+        });
+      }
+    }
+
+    function populateAnalyticsTools() {
+      const salesAnalyticsList = document.getElementById('salesAnalyticsList');
+      const performanceMetricsList = document.getElementById('performanceMetricsList');
+      
+      // Populate Sales Analytics
+      salesAnalyticsList.innerHTML = '';
+      ANALYTICS_TOOLS_DATA.slice(0, 3).forEach(tool => {
+        const item = createListItem(tool);
+        salesAnalyticsList.appendChild(item);
+      });
+
+      // Populate Performance Metrics
+      performanceMetricsList.innerHTML = '';
+      ANALYTICS_TOOLS_DATA.slice(3).forEach(tool => {
+        const item = createListItem(tool);
+        performanceMetricsList.appendChild(item);
+      });
+    }
+
+    function createListItem(data) {
+      const div = document.createElement('a');
+      div.href = data.href;
+      div.className = 'list-item';
+      if (data.href === '#') {
+        div.addEventListener('click', (e) => {
+          e.preventDefault();
+          handleQuickAction(data.id);
+        });
+      } else {
+        div.target = '_blank';
+        div.rel = 'noopener noreferrer';
+      }
+      
+      div.innerHTML = `
+        <div class="list-item-icon">
+          <i class="${data.icon}"></i>
+        </div>
+        <div class="list-item-content">
+          <div class="list-item-title">${data.text}</div>
+          <div class="list-item-desc">${data.desc}</div>
+        </div>
+        <i class="fas fa-external-link-alt" style="color: var(--text-muted); font-size: 0.8rem;"></i>
+      `;
+      return div;
+    }
+
+    function handleQuickAction(actionId) {
+      switch(actionId) {
+        case 'quick-notes':
+          openNotepad();
+          break;
+        case 'quick-calc':
+          window.open('https://www.calculator.net', '_blank');
+          break;
+        default:
+          alert(`Action: ${actionId} - Feature coming soon!`);
+      }
+    }
     
     function renderButtons() {
       dom.buttonContainer.innerHTML = '';
@@ -875,9 +1418,33 @@
             <p>${btnData.category}</p>
           </div>
           <i class="fas fa-arrow-right arrow-icon"></i>
+          <button class="favorite-btn" onclick="toggleFavorite(event, '${btnData.id}')" title="Add to favorites">
+            <i class="fas fa-star"></i>
+          </button>
         `;
         dom.buttonContainer.appendChild(btnElement);
       });
+    }
+
+    window.toggleFavorite = function(event, toolId) {
+      event.preventDefault();
+      event.stopPropagation();
+      
+      const favorites = getFromLocalStorage(FAVORITES_KEY, {});
+      if (!favorites[currentUser.username]) {
+        favorites[currentUser.username] = [];
+      }
+      
+      const index = favorites[currentUser.username].indexOf(toolId);
+      if (index > -1) {
+        favorites[currentUser.username].splice(index, 1);
+      } else {
+        favorites[currentUser.username].push(toolId);
+      }
+      
+      saveToLocalStorage(FAVORITES_KEY, favorites);
+      populateQuickActions(); // Refresh favorites list
+      alert(index > -1 ? 'Removed from favorites!' : 'Added to favorites!');
     }
     
     function filterButtons() {
@@ -917,6 +1484,16 @@
     function openNotepad() {
       dom.notepadTextarea.value = getFromLocalStorage('notepad_' + currentUser.username, '');
       openModal('notepadModal');
+    }
+
+    function openQuickTools() {
+      populateQuickActions();
+      openModal('quickToolsModal');
+    }
+
+    function openAnalytics() {
+      populateAnalyticsTools();
+      openModal('analyticsDashboardModal');
     }
     
     function saveNotepad() {
