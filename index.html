@@ -725,6 +725,35 @@
       .grid-container { grid-template-columns: 1fr; }
       .modal-content { padding: 20px; }
     }
+
+    /* === NUEVO CSS: Estilos para el Efecto de Nieve === */
+    #snow-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 9998; /* Debajo del preloader pero encima de todo lo demás */
+      overflow: hidden;
+    }
+
+    .snowflake {
+      position: absolute;
+      top: -20px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(105vh);
+      }
+    }
+    /* === FIN DEL NUEVO CSS === */
   </style>
 </head>
 <body>
@@ -776,6 +805,9 @@
         <li class="nav-item"><a id="notepadBtnSidebar"><i class="fas fa-sticky-note"></i> Notes</a></li>
         <li class="nav-item"><a id="quickToolsBtnSidebar"><i class="fas fa-bolt"></i> Quick Tools</a></li>
         <li class="nav-item"><a id="analyticsBtnSidebar"><i class="fas fa-chart-line"></i> Analytics</a></li>
+        <!-- === NUEVO BOTÓN: Botón para Activar la Nieve === -->
+        <li class="nav-item"><a id="snowToggleBtn"><i class="fas fa-snowflake"></i> Let It Snow</a></li>
+        <!-- === FIN DEL NUEVO BOTÓN === -->
         <li class="nav-item admin-only" style="display:none;"><a id="userManagementBtnSidebar"><i class="fas fa-users-cog"></i> Users</a></li>
         <li class="nav-item admin-only" style="display:none;"><a id="portalSettingsBtnSidebar"><i class="fas fa-sliders-h"></i> Settings</a></li>
       </ul>
@@ -1157,7 +1189,9 @@
         'createUserBtn', 'newUsername', 'newPassword', 'selectUserForPermissions', 
         'permissionsContainer', 'permissionsList', 'savePermissionsBtn', 'deleteUserBtn', 
         'userManagementMessage', 'searchInput', 'categoryFilter', 'overlay',
-        'profileModalPic', 'profileModalName', 'profileModalRole', 'toolsCount', 'sessionTime'];
+        'profileModalPic', 'profileModalName', 'profileModalRole', 'toolsCount', 'sessionTime',
+        'snowToggleBtn' // === NUEVO: Añadido botón de nieve al caché del DOM ===
+      ];
       ids.forEach(id => dom[id] = document.getElementById(id));
       dom.closeBtns = document.querySelectorAll('.close-btn');
     }
@@ -1181,6 +1215,9 @@
       dom.quickToolsBtnSidebar.addEventListener('click', () => { openQuickTools(); closeSidebar(); });
       dom.analyticsBtnSidebar.addEventListener('click', () => { openAnalytics(); closeSidebar(); });
       
+      // === NUEVO: Event Listener para el botón de nieve ===
+      dom.snowToggleBtn.addEventListener('click', toggleSnowEffect);
+
       dom.closeBtns.forEach(btn => btn.addEventListener('click', (e) => e.target.closest('.modal').style.display = 'none'));
       
       // Close modal on outside click
@@ -1621,6 +1658,54 @@
       ensureUser('amit', 'aminehu@123');
       saveToLocalStorage(USERS_KEY, users);
     }
+    
+    // === NUEVO JAVASCRIPT: Lógica para el Efecto de Nieve ===
+    let isSnowing = false;
+
+    function toggleSnowEffect() {
+      isSnowing = !isSnowing;
+      const snowBtn = document.getElementById('snowToggleBtn');
+      if (isSnowing) {
+        createSnowfall();
+        snowBtn.classList.add('active'); // Opcional: resalta el botón
+        snowBtn.innerHTML = '<i class="fas fa-snowflake"></i> Stop Snow';
+      } else {
+        const snowContainer = document.getElementById('snow-container');
+        if (snowContainer) {
+          snowContainer.remove();
+        }
+        snowBtn.classList.remove('active');
+        snowBtn.innerHTML = '<i class="fas fa-snowflake"></i> Let It Snow';
+      }
+      closeSidebar();
+    }
+
+    function createSnowfall() {
+      const snowContainer = document.createElement('div');
+      snowContainer.id = 'snow-container';
+      document.body.appendChild(snowContainer);
+
+      const numberOfFlakes = 150; // Puedes ajustar este número
+      for (let i = 0; i < numberOfFlakes; i++) {
+        const flake = document.createElement('div');
+        flake.className = 'snowflake';
+
+        const size = Math.random() * 4 + 2 + 'px'; // tamaño de 2px a 6px
+        const left = Math.random() * 100 + 'vw';
+        const duration = Math.random() * 10 + 5 + 's'; // duración de 5s a 15s
+        const delay = Math.random() * 10 + 's';
+
+        flake.style.width = size;
+        flake.style.height = size;
+        flake.style.left = left;
+        flake.style.animationDuration = duration;
+        flake.style.animationDelay = delay;
+        flake.style.opacity = Math.random();
+
+        snowContainer.appendChild(flake);
+      }
+    }
+    // === FIN DEL NUEVO JAVASCRIPT ===
   </script>
 </body>
 </html>
