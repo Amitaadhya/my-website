@@ -28,6 +28,28 @@
       --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
     }
 
+    /* === NUEVO: Definiciones de Temas de Color === */
+    body[data-theme="blue"] {
+      --accent: #00d4ff;
+      --accent-glow: rgba(0, 212, 255, 0.4);
+      --gradient-1: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+    body[data-theme="purple"] {
+      --accent: #a78bfa;
+      --accent-glow: rgba(167, 139, 250, 0.4);
+      --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+    body[data-theme="green"] {
+      --accent: #4ade80;
+      --accent-glow: rgba(74, 222, 128, 0.4);
+      --gradient-1: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+    }
+     body[data-theme="orange"] {
+      --accent: #f59e0b;
+      --accent-glow: rgba(245, 158, 11, 0.4);
+      --gradient-1: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
     * { margin: 0; padding: 0; box-sizing: border-box; }
     
     body {
@@ -36,23 +58,21 @@
       color: var(--text-main);
       overflow-x: hidden;
       min-height: 100vh;
-      background-image: 
-        radial-gradient(circle at 20% 50%, rgba(102, 126, 234, 0.1), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(240, 147, 251, 0.1), transparent 30%),
-        radial-gradient(circle at 40% 80%, rgba(79, 172, 254, 0.1), transparent 30%);
+      /* Eliminamos los degradados radiales estáticos para el nuevo efecto */
     }
 
     /* Enhanced Scrollbar */
     ::-webkit-scrollbar { width: 8px; }
     ::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.05); border-radius: 10px; }
     ::-webkit-scrollbar-thumb { 
-      background: linear-gradient(45deg, var(--accent), #764ba2); 
+      background: var(--gradient-1);
       border-radius: 10px; 
       border: 2px solid transparent;
       background-clip: content-box;
+      transition: background 0.3s;
     }
     ::-webkit-scrollbar-thumb:hover { 
-      background: linear-gradient(45deg, #00f2fe, var(--accent)); 
+      background: var(--accent);
     }
 
     /* Enhanced Preloader */
@@ -197,8 +217,24 @@
     .portal-view {
       display: flex; min-height: 100vh; overflow: hidden;
       opacity: 0; pointer-events: none; transition: 0.5s;
+      position: relative;
     }
     .portal-view.visible { opacity: 1; pointer-events: auto; }
+    
+    /* === NUEVO: Efecto de Fondo Mágico === */
+    #background-glow {
+      position: fixed;
+      top: var(--mouse-y, 50%);
+      left: var(--mouse-x, 50%);
+      width: 800px;
+      height: 800px;
+      background: radial-gradient(circle, var(--accent-glow) 0%, transparent 60%);
+      transform: translate(-50%, -50%);
+      transition: top 0.2s ease-out, left 0.2s ease-out;
+      pointer-events: none;
+      z-index: -1;
+    }
+
 
     /* Enhanced Sidebar */
     .sidebar {
@@ -260,6 +296,45 @@
       color: var(--accent); border-left: 3px solid var(--accent);
     }
     .nav-item i { width: 20px; text-align: center; }
+
+    /* === NUEVO: Estilos para el Selector de Tema === */
+    .theme-customizer {
+      margin-top: 20px;
+      padding-top: 20px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .theme-customizer h4 {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      padding-left: 10px;
+    }
+    .theme-swatches {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+    }
+    .swatch {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      cursor: pointer;
+      border: 3px solid transparent;
+      transition: all 0.3s;
+    }
+    .swatch:hover {
+      transform: scale(1.1);
+    }
+    .swatch.active {
+      border-color: white;
+      box-shadow: 0 0 15px rgba(255,255,255,0.5);
+    }
+    #swatch-blue { background: #00d4ff; }
+    #swatch-purple { background: #a78bfa; }
+    #swatch-green { background: #4ade80; }
+    #swatch-orange { background: #f59e0b; }
 
     .user-panel {
       padding: 16px; background: rgba(0,0,0,0.2);
@@ -357,6 +432,9 @@
       justify-content: space-between;
       min-height: 180px; overflow: hidden;
       backdrop-filter: blur(10px);
+      /* === NUEVO: Propiedades para el Efecto 3D === */
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .tool-card::before {
@@ -370,7 +448,7 @@
     }
     
     .tool-card:hover {
-      transform: translateY(-10px) scale(1.02);
+      /* La transformación ahora se maneja con JS para el efecto 3D */
       border-color: var(--accent);
       box-shadow: 
         0 25px 50px -10px rgba(0, 0, 0, 0.5), 
@@ -386,6 +464,8 @@
       margin-bottom: 20px; transition: 0.3s;
       position: relative;
       overflow: hidden;
+      /* === NUEVO: Transformación para el efecto 3D anidado === */
+      transform: translateZ(30px);
     }
     
     .icon-box::before {
@@ -399,7 +479,7 @@
     }
     
     .tool-card:hover .icon-box {
-      transform: rotate(-10deg) scale(1.1);
+      transform: translateZ(50px) rotate(-10deg) scale(1.1);
       color: white;
     }
     
@@ -408,6 +488,9 @@
       z-index: 1;
     }
     
+    .card-text {
+        transform: translateZ(20px);
+    }
     .card-text h3 { 
       font-size: 1.2rem; 
       font-weight: 600; 
@@ -431,16 +514,17 @@
       opacity: 0; transform: translateX(-10px); transition: 0.3s;
       color: var(--accent);
       font-size: 1.2rem;
+      transform: translateZ(40px);
     }
     .tool-card:hover .arrow-icon { 
       opacity: 1; 
-      transform: translateX(0); 
+      transform: translateZ(40px) translateX(0); 
       animation: bounce 0.6s infinite;
     }
     
     @keyframes bounce {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(5px); }
+      0%, 100% { transform: translateZ(40px) translateX(0); }
+      50% { transform: translateZ(40px) translateX(5px); }
     }
 
     @keyframes cardFadeIn {
@@ -726,7 +810,6 @@
       .modal-content { padding: 20px; }
     }
 
-    /* === NUEVO CSS: Estilos para el Efecto de Nieve === */
     #snow-container {
       position: fixed;
       top: 0;
@@ -734,7 +817,7 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
-      z-index: 9998; /* Debajo del preloader pero encima de todo lo demás */
+      z-index: 9998;
       overflow: hidden;
     }
 
@@ -753,10 +836,9 @@
         transform: translateY(105vh);
       }
     }
-    /* === FIN DEL NUEVO CSS === */
   </style>
 </head>
-<body>
+<body data-theme="blue"> <!-- Tema por defecto -->
 
   <!-- Enhanced Preloader -->
   <div id="preloader"><div class="loader"></div></div>
@@ -790,6 +872,7 @@
 
   <!-- Enhanced Main Dashboard -->
   <div class="portal-view" id="portalView">
+    <div id="background-glow"></div> <!-- === NUEVO: Elemento para el fondo mágico === -->
     <div class="overlay" id="overlay"></div>
     
     <!-- Enhanced Sidebar -->
@@ -805,13 +888,22 @@
         <li class="nav-item"><a id="notepadBtnSidebar"><i class="fas fa-sticky-note"></i> Notes</a></li>
         <li class="nav-item"><a id="quickToolsBtnSidebar"><i class="fas fa-bolt"></i> Quick Tools</a></li>
         <li class="nav-item"><a id="analyticsBtnSidebar"><i class="fas fa-chart-line"></i> Analytics</a></li>
-        <!-- === NUEVO BOTÓN: Botón para Activar la Nieve === -->
         <li class="nav-item"><a id="snowToggleBtn"><i class="fas fa-snowflake"></i> Let It Snow</a></li>
-        <!-- === FIN DEL NUEVO BOTÓN === -->
         <li class="nav-item admin-only" style="display:none;"><a id="userManagementBtnSidebar"><i class="fas fa-users-cog"></i> Users</a></li>
         <li class="nav-item admin-only" style="display:none;"><a id="portalSettingsBtnSidebar"><i class="fas fa-sliders-h"></i> Settings</a></li>
       </ul>
       
+      <!-- === NUEVO: Sección para Personalizar Tema === -->
+      <div class="theme-customizer">
+        <h4>Customize Theme</h4>
+        <div class="theme-swatches">
+            <div class="swatch active" id="swatch-blue" data-theme="blue"></div>
+            <div class="swatch" id="swatch-purple" data-theme="purple"></div>
+            <div class="swatch" id="swatch-green" data-theme="green"></div>
+            <div class="swatch" id="swatch-orange" data-theme="orange"></div>
+        </div>
+      </div>
+
       <div class="user-panel" id="userProfile" style="display:none;">
         <img id="userProfilePic" src="" alt="User">
         <div class="user-details">
@@ -827,7 +919,7 @@
         <div style="display:flex; align-items:center;">
           <button id="menuToggle"><i class="fas fa-bars"></i></button>
           <div class="welcome-section">
-            <h2 id="welcomeMessage">Welcome</h2>
+            <h2 id="welcomeMessage"></h2> <!-- Eliminado el texto para la animación -->
             <p>Here is your mission control center.</p>
           </div>
         </div>
@@ -886,7 +978,7 @@
     </main>
   </div>
   
-  <!-- Enhanced Profile Modal -->
+  <!-- Modals -->
   <div id="userProfileModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -911,7 +1003,6 @@
     </div>
   </div>
 
-  <!-- Enhanced Notepad Modal -->
   <div id="notepadModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -925,7 +1016,6 @@
     </div>
   </div>
 
-  <!-- Quick Tools Modal -->
   <div id="quickToolsModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -951,7 +1041,6 @@
     </div>
   </div>
 
-  <!-- Analytics Dashboard Modal -->
   <div id="analyticsDashboardModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -977,7 +1066,6 @@
     </div>
   </div>
 
-  <!-- Enhanced User Management Modal -->
   <div id="userManagementModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -1022,7 +1110,6 @@
     </div>
   </div>
 
-  <!-- Enhanced Settings Modal -->
   <div id="portalSettingsModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -1041,12 +1128,13 @@
     const USERS_KEY = 'radnikPortalUsers_v10';
     const PERMISSIONS_KEY = 'radnikPortalPermissions_v10';
     const FAVORITES_KEY = 'radnikPortalFavorites_v10';
+    const THEME_KEY = 'radnikPortalTheme_v10'; // === NUEVO: Clave para guardar el tema ===
     let currentUser = null;
     let allButtons = [];
     let filteredButtons = [];
     let sessionStartTime = Date.now();
 
-    // Enhanced Button Data with More Tools
+    // Enhanced Button Data (sin cambios, se omite por brevedad)
     const ALL_BUTTONS_DATA = [
       // Finance Tools
       { id: "noida-tax-invoice", href: "https://docs.google.com/spreadsheets/d/1p1LreGjZFEWSY3qfkbGaWGymDa_3kzwucDH3xHoPzqU/edit", icon: "fas fa-file-invoice-dollar", text: "Noida Tax Invoice Log", category: "Finance" },
@@ -1125,7 +1213,6 @@
       { id: "website-screenshot", href: "https://screenshot.guru", icon: "fas fa-camera", text: "Website Screenshot", category: "Tools" }
     ];
 
-    // Quick Actions Data
     const QUICK_ACTIONS_DATA = [
       { id: "quick-calc", href: "https://www.calculator.net", icon: "fas fa-calculator", text: "Quick Calculator", desc: "Basic calculations" },
       { id: "quick-notes", href: "#", icon: "fas fa-sticky-note", text: "Quick Notes", desc: "Open notepad" },
@@ -1135,7 +1222,6 @@
       { id: "quick-password", href: "https://passwordsgenerator.net", icon: "fas fa-key", text: "Password Gen", desc: "Generate passwords" }
     ];
 
-    // Analytics Tools Data
     const ANALYTICS_TOOLS_DATA = [
       { id: "sales-today", href: "#", icon: "fas fa-calendar-day", text: "Today's Sales", desc: "Real-time sales data" },
       { id: "sales-weekly", href: "#", icon: "fas fa-calendar-week", text: "Weekly Report", desc: "Weekly sales summary" },
@@ -1166,6 +1252,7 @@
       cacheDOMElements();
       initDefaultUsers();
       initEventListeners();
+      loadTheme(); // === NUEVO: Cargar tema guardado ===
       updateClock();
       setInterval(updateClock, 1000);
 
@@ -1190,7 +1277,7 @@
         'permissionsContainer', 'permissionsList', 'savePermissionsBtn', 'deleteUserBtn', 
         'userManagementMessage', 'searchInput', 'categoryFilter', 'overlay',
         'profileModalPic', 'profileModalName', 'profileModalRole', 'toolsCount', 'sessionTime',
-        'snowToggleBtn' // === NUEVO: Añadido botón de nieve al caché del DOM ===
+        'snowToggleBtn'
       ];
       ids.forEach(id => dom[id] = document.getElementById(id));
       dom.closeBtns = document.querySelectorAll('.close-btn');
@@ -1215,12 +1302,10 @@
       dom.quickToolsBtnSidebar.addEventListener('click', () => { openQuickTools(); closeSidebar(); });
       dom.analyticsBtnSidebar.addEventListener('click', () => { openAnalytics(); closeSidebar(); });
       
-      // === NUEVO: Event Listener para el botón de nieve ===
       dom.snowToggleBtn.addEventListener('click', toggleSnowEffect);
 
       dom.closeBtns.forEach(btn => btn.addEventListener('click', (e) => e.target.closest('.modal').style.display = 'none'));
       
-      // Close modal on outside click
       document.querySelectorAll('.modal').forEach(modal => {
         modal.addEventListener('click', (e) => {
           if (e.target === modal) modal.style.display = 'none';
@@ -1232,6 +1317,12 @@
       dom.selectUserForPermissions.addEventListener('change', loadPermissionsForUser);
       dom.savePermissionsBtn.addEventListener('click', savePermissions);
       dom.deleteUserBtn.addEventListener('click', deleteUser);
+
+      // === NUEVO: Event Listeners para nuevas características ===
+      document.addEventListener('mousemove', handleMagicBackground);
+      document.querySelectorAll('.swatch').forEach(swatch => {
+          swatch.addEventListener('click', changeTheme);
+      });
     }
     
     function toggleSidebar() {
@@ -1284,7 +1375,7 @@
       dom.loginContainer.classList.add('hidden');
       dom.portalView.classList.add('visible');
       
-      dom.welcomeMessage.textContent = `Hello, ${currentUser.username}!`;
+      animateWelcomeMessage(`Hello, ${currentUser.username}!`);
       dom.userNameText.textContent = currentUser.username;
       dom.userProfilePic.src = currentUser.profilePicUrl;
       dom.userProfile.style.display = 'flex';
@@ -1340,14 +1431,12 @@
       const quickActionsList = document.getElementById('quickActionsList');
       const favoritesList = document.getElementById('favoritesList');
       
-      // Populate Quick Actions
       quickActionsList.innerHTML = '';
       QUICK_ACTIONS_DATA.forEach(action => {
         const item = createListItem(action);
         quickActionsList.appendChild(item);
       });
 
-      // Populate Favorites
       favoritesList.innerHTML = '';
       const favorites = getFromLocalStorage(FAVORITES_KEY, {})[currentUser.username] || [];
       const favoriteItems = ALL_BUTTONS_DATA.filter(btn => favorites.includes(btn.id));
@@ -1372,14 +1461,12 @@
       const salesAnalyticsList = document.getElementById('salesAnalyticsList');
       const performanceMetricsList = document.getElementById('performanceMetricsList');
       
-      // Populate Sales Analytics
       salesAnalyticsList.innerHTML = '';
       ANALYTICS_TOOLS_DATA.slice(0, 3).forEach(tool => {
         const item = createListItem(tool);
         salesAnalyticsList.appendChild(item);
       });
 
-      // Populate Performance Metrics
       performanceMetricsList.innerHTML = '';
       ANALYTICS_TOOLS_DATA.slice(3).forEach(tool => {
         const item = createListItem(tool);
@@ -1415,16 +1502,9 @@
     }
 
     function handleQuickAction(actionId) {
-      switch(actionId) {
-        case 'quick-notes':
-          openNotepad();
-          break;
-        case 'quick-calc':
-          window.open('https://www.calculator.net', '_blank');
-          break;
-        default:
-          alert(`Action: ${actionId} - Feature coming soon!`);
-      }
+      if(actionId === 'quick-notes') openNotepad();
+      else if(actionId === 'quick-calc') window.open('https://www.calculator.net', '_blank');
+      else alert(`Action: ${actionId} - Feature coming soon!`);
     }
     
     function renderButtons() {
@@ -1455,35 +1535,14 @@
             <p>${btnData.category}</p>
           </div>
           <i class="fas fa-arrow-right arrow-icon"></i>
-          <button class="favorite-btn" onclick="toggleFavorite(event, '${btnData.id}')" title="Add to favorites">
-            <i class="fas fa-star"></i>
-          </button>
         `;
         dom.buttonContainer.appendChild(btnElement);
       });
+      
+      // === NUEVO: Activar el efecto de inclinación 3D en las nuevas tarjetas ===
+      init3DTiltEffect();
     }
 
-    window.toggleFavorite = function(event, toolId) {
-      event.preventDefault();
-      event.stopPropagation();
-      
-      const favorites = getFromLocalStorage(FAVORITES_KEY, {});
-      if (!favorites[currentUser.username]) {
-        favorites[currentUser.username] = [];
-      }
-      
-      const index = favorites[currentUser.username].indexOf(toolId);
-      if (index > -1) {
-        favorites[currentUser.username].splice(index, 1);
-      } else {
-        favorites[currentUser.username].push(toolId);
-      }
-      
-      saveToLocalStorage(FAVORITES_KEY, favorites);
-      populateQuickActions(); // Refresh favorites list
-      alert(index > -1 ? 'Removed from favorites!' : 'Added to favorites!');
-    }
-    
     function filterButtons() {
       const searchTerm = dom.searchInput.value.toLowerCase();
       const selectedCategory = dom.categoryFilter.value;
@@ -1498,10 +1557,7 @@
       renderButtons();
     }
 
-    function openModal(modalId) {
-      document.getElementById(modalId).style.display = 'block';
-    }
-    
+    function openModal(modalId) { document.getElementById(modalId).style.display = 'block'; }
     function showUserManagementMessage(msg, type = 'success') {
       dom.userManagementMessage.textContent = msg;
       dom.userManagementMessage.className = 'message-box ' + type;
@@ -1522,16 +1578,8 @@
       dom.notepadTextarea.value = getFromLocalStorage('notepad_' + currentUser.username, '');
       openModal('notepadModal');
     }
-
-    function openQuickTools() {
-      populateQuickActions();
-      openModal('quickToolsModal');
-    }
-
-    function openAnalytics() {
-      populateAnalyticsTools();
-      openModal('analyticsDashboardModal');
-    }
+    function openQuickTools() { populateQuickActions(); openModal('quickToolsModal'); }
+    function openAnalytics() { populateAnalyticsTools(); openModal('analyticsDashboardModal'); }
     
     function saveNotepad() {
       saveToLocalStorage('notepad_' + currentUser.username, dom.notepadTextarea.value);
@@ -1559,56 +1607,28 @@
     function createUser() {
       const username = dom.newUsername.value.trim();
       const password = dom.newPassword.value.trim();
-      
-      if (!username || !password) {
-        showUserManagementMessage('Please fill in all fields.', 'error');
-        return;
-      }
-      
-      if (username.length < 3) {
-        showUserManagementMessage('Username must be at least 3 characters.', 'error');
-        return;
-      }
-
+      if (!username || !password) { showUserManagementMessage('Please fill in all fields.', 'error'); return; }
+      if (username.length < 3) { showUserManagementMessage('Username must be at least 3 characters.', 'error'); return; }
       let users = getFromLocalStorage(USERS_KEY, []);
-      if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
-        showUserManagementMessage('Username already exists.', 'error');
-        return;
-      }
-      
-      users.push({ 
-        username, 
-        password: simpleHash(password), 
-        profilePicUrl: 'https://i.pravatar.cc/150?u=' + username 
-      });
+      if (users.some(u => u.username.toLowerCase() === username.toLowerCase())) { showUserManagementMessage('Username already exists.', 'error'); return; }
+      users.push({ username, password: simpleHash(password), profilePicUrl: 'https://i.pravatar.cc/150?u=' + username });
       saveToLocalStorage(USERS_KEY, users);
       showUserManagementMessage('User created successfully!', 'success');
-      dom.newUsername.value = '';
-      dom.newPassword.value = '';
+      dom.newUsername.value = ''; dom.newPassword.value = '';
       populateUsersDropdown();
     }
     
     function loadPermissionsForUser() {
       const username = dom.selectUserForPermissions.value;
       dom.deleteUserBtn.disabled = !username;
-      
-      if (!username) {
-        dom.permissionsContainer.style.display = 'none';
-        return;
-      }
-      
-      const allPermissions = getFromLocalStorage(PERMISSIONS_KEY, {});
-      const userPermissions = allPermissions[username] || [];
-      
+      if (!username) { dom.permissionsContainer.style.display = 'none'; return; }
+      const userPermissions = getFromLocalStorage(PERMISSIONS_KEY, {})[username] || [];
       dom.permissionsList.innerHTML = '';
       ALL_BUTTONS_DATA.forEach(btn => {
         const isChecked = userPermissions.includes(btn.id);
         const div = document.createElement('div');
         div.className = 'permission-item';
-        div.innerHTML = `
-          <input type="checkbox" id="perm-${btn.id}" value="${btn.id}" ${isChecked ? 'checked' : ''}>
-          <label for="perm-${btn.id}">${btn.text}</label>
-        `;
+        div.innerHTML = `<input type="checkbox" id="perm-${btn.id}" value="${btn.id}" ${isChecked ? 'checked' : ''}><label for="perm-${btn.id}">${btn.text}</label>`;
         dom.permissionsList.appendChild(div);
       });
       dom.permissionsContainer.style.display = 'block';
@@ -1617,28 +1637,19 @@
     function savePermissions() {
       const username = dom.selectUserForPermissions.value;
       if (!username) return;
-
       let allPermissions = getFromLocalStorage(PERMISSIONS_KEY, {});
-      const selectedPermissions = Array.from(dom.permissionsList.querySelectorAll('input:checked'))
-        .map(input => input.value);
-      allPermissions[username] = selectedPermissions;
+      allPermissions[username] = Array.from(dom.permissionsList.querySelectorAll('input:checked')).map(input => input.value);
       saveToLocalStorage(PERMISSIONS_KEY, allPermissions);
       showUserManagementMessage('Permissions saved successfully!', 'success');
     }
     
     function deleteUser() {
       const username = dom.selectUserForPermissions.value;
-      if (!username) return;
-      
-      if (!confirm(`Are you sure you want to delete user "${username}"?`)) return;
-      
-      let users = getFromLocalStorage(USERS_KEY, []).filter(u => u.username !== username);
-      saveToLocalStorage(USERS_KEY, users);
-
+      if (!username || !confirm(`Are you sure you want to delete user "${username}"?`)) return;
+      saveToLocalStorage(USERS_KEY, getFromLocalStorage(USERS_KEY, []).filter(u => u.username !== username));
       let allPermissions = getFromLocalStorage(PERMISSIONS_KEY, {});
       delete allPermissions[username];
       saveToLocalStorage(PERMISSIONS_KEY, allPermissions);
-      
       showUserManagementMessage('User deleted successfully!', 'success');
       populateUsersDropdown();
       dom.permissionsContainer.style.display = 'none';
@@ -1647,33 +1658,27 @@
     function initDefaultUsers() {
       let users = getFromLocalStorage(USERS_KEY, []);
       const defaultPic = 'https://i.postimg.cc/sXPJH9xd/Screenshot-2025-06-19-143219.png';
-      
       const ensureUser = (username, password) => {
         if (!users.some(u => u.username.toLowerCase() === username.toLowerCase())) {
           users.push({ username, password: simpleHash(password), profilePicUrl: defaultPic });
         }
       };
-      
       ensureUser('admin', 'aminehu@123');
       ensureUser('amit', 'aminehu@123');
       saveToLocalStorage(USERS_KEY, users);
     }
     
-    // === NUEVO JAVASCRIPT: Lógica para el Efecto de Nieve ===
     let isSnowing = false;
-
     function toggleSnowEffect() {
       isSnowing = !isSnowing;
       const snowBtn = document.getElementById('snowToggleBtn');
       if (isSnowing) {
         createSnowfall();
-        snowBtn.classList.add('active'); // Opcional: resalta el botón
+        snowBtn.classList.add('active');
         snowBtn.innerHTML = '<i class="fas fa-snowflake"></i> Stop Snow';
       } else {
         const snowContainer = document.getElementById('snow-container');
-        if (snowContainer) {
-          snowContainer.remove();
-        }
+        if (snowContainer) snowContainer.remove();
         snowBtn.classList.remove('active');
         snowBtn.innerHTML = '<i class="fas fa-snowflake"></i> Let It Snow';
       }
@@ -1684,28 +1689,83 @@
       const snowContainer = document.createElement('div');
       snowContainer.id = 'snow-container';
       document.body.appendChild(snowContainer);
-
-      const numberOfFlakes = 150; // Puedes ajustar este número
-      for (let i = 0; i < numberOfFlakes; i++) {
+      for (let i = 0; i < 150; i++) {
         const flake = document.createElement('div');
         flake.className = 'snowflake';
-
-        const size = Math.random() * 4 + 2 + 'px'; // tamaño de 2px a 6px
-        const left = Math.random() * 100 + 'vw';
-        const duration = Math.random() * 10 + 5 + 's'; // duración de 5s a 15s
-        const delay = Math.random() * 10 + 's';
-
+        const size = Math.random() * 4 + 2 + 'px';
         flake.style.width = size;
         flake.style.height = size;
-        flake.style.left = left;
-        flake.style.animationDuration = duration;
-        flake.style.animationDelay = delay;
+        flake.style.left = Math.random() * 100 + 'vw';
+        flake.style.animationDuration = Math.random() * 10 + 5 + 's';
+        flake.style.animationDelay = Math.random() * 10 + 's';
         flake.style.opacity = Math.random();
-
         snowContainer.appendChild(flake);
       }
     }
-    // === FIN DEL NUEVO JAVASCRIPT ===
+    
+    // === NUEVAS FUNCIONES DE JAVASCRIPT ===
+
+    // 1. Animación del Mensaje de Bienvenida
+    function animateWelcomeMessage(text) {
+        const welcomeEl = document.getElementById('welcomeMessage');
+        welcomeEl.textContent = '';
+        let i = 0;
+        const interval = setInterval(() => {
+            if (i < text.length) {
+                welcomeEl.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(interval);
+            }
+        }, 50); // Velocidad de escritura
+    }
+
+    // 2. Fondo Mágico que sigue al cursor
+    function handleMagicBackground(e) {
+        const glow = document.getElementById('background-glow');
+        if(glow) {
+            glow.style.setProperty('--mouse-x', e.clientX + 'px');
+            glow.style.setProperty('--mouse-y', e.clientY + 'px');
+        }
+    }
+    
+    // 3. Efecto de Inclinación 3D en las Tarjetas
+    function init3DTiltEffect() {
+        const cards = document.querySelectorAll('.tool-card');
+        cards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const { width, height } = rect;
+                const rotateX = (y / height - 0.5) * -20; // Inclinación de -10 a 10 grados
+                const rotateY = (x / width - 0.5) * 20;  // Inclinación de -10 a 10 grados
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+    }
+    
+    // 4. Lógica para Cambiar y Guardar el Tema
+    function changeTheme(e) {
+        const selectedTheme = e.target.dataset.theme;
+        document.body.setAttribute('data-theme', selectedTheme);
+        localStorage.setItem(THEME_KEY, selectedTheme);
+
+        document.querySelectorAll('.swatch').forEach(s => s.classList.remove('active'));
+        e.target.classList.add('active');
+    }
+
+    function loadTheme() {
+        const savedTheme = localStorage.getItem(THEME_KEY) || 'blue';
+        document.body.setAttribute('data-theme', savedTheme);
+        document.querySelectorAll('.swatch').forEach(s => {
+            s.classList.toggle('active', s.dataset.theme === savedTheme);
+        });
+    }
+
   </script>
 </body>
 </html>
