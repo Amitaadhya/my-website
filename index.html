@@ -135,6 +135,72 @@
       to { transform: rotate(360deg); } 
     }
 
+    /* Futuristic Animated Logo for Login */
+    .login-logo-wrapper {
+      position: relative;
+      width: 140px;
+      height: 140px;
+      margin: 0 auto 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .orbit-ring {
+      position: absolute;
+      inset: -8px;
+      border-radius: 50%;
+      border: 2px dashed var(--accent);
+      animation: rotateOrbit 12s linear infinite;
+      opacity: 0.7;
+    }
+
+    .orbit-ring-2 {
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      border: 1.5px solid transparent;
+      border-top: 2px solid #f093fb;
+      border-bottom: 2px solid #4facfe;
+      animation: rotateOrbitRev 8s linear infinite;
+    }
+
+    .logo-glow {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      padding: 5px;
+      background: var(--gradient-1);
+      box-shadow: 0 0 50px var(--accent-glow), inset 0 0 20px rgba(255,255,255,0.2);
+      border: 2px solid rgba(255, 255, 255, 0.4);
+      animation: pulseGlow 3s ease-in-out infinite alternate;
+      position: relative;
+      z-index: 2;
+    }
+    
+    .logo-glow img {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.5));
+    }
+
+    @keyframes rotateOrbit {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes rotateOrbitRev {
+      0% { transform: rotate(360deg); }
+      100% { transform: rotate(0deg); }
+    }
+
+    @keyframes pulseGlow {
+      0% { transform: scale(0.96); box-shadow: 0 0 30px var(--accent-glow); }
+      100% { transform: scale(1.04); box-shadow: 0 0 60px var(--accent-glow), 0 0 30px rgba(240, 147, 251, 0.4); }
+    }
+
     /* Premium Login Screen with Advanced Glassmorphism */
     .login-container {
       position: fixed; inset: 0; z-index: 2000;
@@ -178,23 +244,6 @@
       0% { transform: translateX(-100%); }
       100% { transform: translateX(100%); }
     }
-
-    .logo-glow {
-      width: 120px; height: 120px; margin: 0 auto 30px;
-      border-radius: 50%; padding: 6px;
-      background: var(--gradient-1);
-      box-shadow: 0 0 60px var(--accent-glow);
-      border: 2px solid rgba(255, 255, 255, 0.2);
-      animation: pulse 2s infinite;
-      position: relative;
-    }
-    
-    @keyframes pulse {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
-    
-    .logo-glow img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
 
     .login-box h1 { 
       font-family: 'Space Grotesk', sans-serif; 
@@ -561,7 +610,7 @@
     }
     
     .card-text {
-        transform: translateZ(30px);
+      transform: translateZ(30px);
     }
     .card-text h3 { 
       font-size: 1.3rem; 
@@ -949,13 +998,20 @@
   <!-- Enhanced Preloader -->
   <div id="preloader"><div class="loader"></div></div>
 
-  <!-- Enhanced Login Page -->
+  <!-- Enhanced Login Page with Futuristic Animated Logo -->
   <div class="login-container" id="loginContainer">
     <div class="login-box">
       <div class="premium-badge">PREMIUM</div>
-      <div class="logo-glow">
-        <img src="https://i.postimg.cc/sXPJH9xd/Screenshot-2025-06-19-143219.png" alt="Logo">
+      
+      <!-- New Animated Logo Box -->
+      <div class="login-logo-wrapper">
+        <div class="orbit-ring"></div>
+        <div class="orbit-ring-2"></div>
+        <div class="logo-glow">
+          <img src="https://i.postimg.cc/sXPJH9xd/Screenshot-2025-06-19-143219.png" alt="Logo">
+        </div>
       </div>
+
       <h1 class="glow-text">Amit Chaudhary</h1>
       <p>Welcome to your Premium Dashboard Experience</p>
       
@@ -1241,9 +1297,10 @@
     let filteredButtons = [];
     let sessionStartTime = Date.now();
 
-    // COMPLETE BUTTON DATA WITH ALL PROPER LINKS - VERIFIED AND WORKING
+    // COMPLETE BUTTON DATA WITH ALL NEW BUTTONS ADDED
     const ALL_BUTTONS_DATA = [
       // === FINANCE TOOLS ===
+      { id: "advance-payment-details", href: "https://docs.google.com/spreadsheets/d/1LZa3JvfEdt-9cdQkEmsEluwurMoDzmsXIyFWNpAcnfs/edit?gid=247319421#gid=247319421", icon: "fas fa-money-bill-wave", text: "ADVANCE PAYMENT DETAILS", category: "Finance" },
       { id: "quince-fy-report", href: "https://docs.google.com/spreadsheets/d/1Lv5JeO3CAG_Ne3-HxyFrf7tiigJU5Gt1ogKdMlwS0Us/edit?gid=0#gid=0", icon: "fas fa-file-contract", text: "Quince Financial Year Report", category: "Finance" },
       { id: "noida-tax-invoice", href: "https://docs.google.com/spreadsheets/d/1p1LreGjZFEWSY3qfkbGaWGymDa_3kzwucDH3xHoPzqU/edit", icon: "fas fa-file-invoice-dollar", text: "Noida Tax Invoice Log", category: "Finance" },
       { id: "186-tax-invoice", href: "https://docs.google.com/spreadsheets/d/1clgoSGc3BF6u25v-cumlJMqrCOZYSydWJ_xSAOpe0FE/edit", icon: "fas fa-receipt", text: "186 Tax Invoice Log", category: "Finance" },
@@ -1269,6 +1326,8 @@
       { id: "quince-returns-data", href: "https://docs.google.com/spreadsheets/d/1zPpTDeF6PcnZ8sNpJtl_mLkUX1GihxynH7gYwFhxais/edit?gid=0#gid=0", icon: "fas fa-undo", text: "Quince Returns Data", category: "Sales" },
 
       // === ANALYTICS TOOLS ===
+      { id: "last-brand-garments", href: "https://docs.google.com/spreadsheets/d/17XLwAmZxvmxOaB-DzPIBjuGmb3u_Zxz9_1aGn175yeE/edit?pli=1&gid=2080176960#gid=2080176960", icon: "fas fa-tshirt", text: "LAST BRAND | Quince × Radnik Garments", category: "Analytics" },
+      { id: "last-brand-home", href: "https://docs.google.com/spreadsheets/d/1uIgnNoAFi8BIJv9BqYHTJZyKSWDrLPuGBhr0Abq006U/edit?gid=0#gid=0", icon: "fas fa-couch", text: "LAST BRAND | Quince × Radnik Home", category: "Analytics" },
       { id: "live-graph-quince", href: "https://docs.google.com/spreadsheets/d/17XLwAmZxvmxOaB-DzPIBjuGmb3u_Zxz9_1aGn175yeE/edit", icon: "fas fa-chart-line", text: "Live Graph Quince", category: "Analytics" },
       { id: "186-qs-view", href: "https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_ihmuGBmPjY_SF6zXQe825cL0i3O9FjTod0gVVgjvc9uSU1HrQsSxcGSVRLAUrJA8NjruJPKs7ezi/pubhtml", icon: "fas fa-chart-pie", text: "186-Q-S-VIEW", category: "Analytics" },
       { id: "c16-qs-view", href: "https://docs.google.com/spreadsheets/d/e/2PACX-1vT1MRNcqWJsXyp4gKAq00N2qKmjoNgXkwVCmxH2lBeeitlz0kNfSiY-z1sNK2JTciPN6mzUpF9-G36Z/pubhtml", icon: "fas fa-chart-area", text: "C16-Q-S-VIEW", category: "Analytics" },
@@ -1429,7 +1488,6 @@
       dom.savePermissionsBtn.addEventListener('click', savePermissions);
       dom.deleteUserBtn.addEventListener('click', deleteUser);
 
-      // Enhanced Event Listeners
       document.addEventListener('mousemove', handleMagicBackground);
       document.querySelectorAll('.swatch').forEach(swatch => {
           swatch.addEventListener('click', changeTheme);
@@ -1650,7 +1708,6 @@
         dom.buttonContainer.appendChild(btnElement);
       });
       
-      // Initialize 3D tilt effect
       init3DTiltEffect();
     }
 
@@ -1814,8 +1871,6 @@
       }
     }
     
-    // Premium Enhanced Functions
-    
     function animateWelcomeMessage(text) {
         const welcomeEl = document.getElementById('welcomeMessage');
         welcomeEl.textContent = '';
@@ -1872,7 +1927,6 @@
             s.classList.toggle('active', s.dataset.theme === savedTheme);
         });
     }
-
   </script>
 </body>
 </html>
