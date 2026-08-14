@@ -4,7 +4,7 @@ html
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Amit Chaudhary | Ultimate Enterprise Amit Chaudhary</title>
+  <title>Amit Chaudhary | AI Executive Command Center</title>
   <link rel="icon" href="https://i.postimg.cc/sXPJH9xd/Screenshot-2025-06-19-143219.png" type="image/png">
   
   <!-- Fonts & Icons -->
@@ -15,8 +15,8 @@ html
   
   <style>
     :root {
-      --bg-dark: #04060b;
-      --bg-card: rgba(11, 18, 33, 0.7);
+      --bg-dark: #030509;
+      --bg-card: rgba(10, 16, 30, 0.75);
       --accent: #00f2fe;
       --accent-secondary: #4facfe;
       --accent-glow: rgba(0, 242, 254, 0.4);
@@ -30,6 +30,7 @@ html
       --gradient-1: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
       --gradient-2: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
       --gradient-aurora: linear-gradient(135deg, #00f2fe 0%, #4facfe 40%, #9d4edd 100%);
+      --gradient-danger: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
     }
 
     body[data-theme="blue"] {
@@ -63,13 +64,14 @@ html
       position: relative;
     }
 
+    /* Ambient Animated Mesh */
     .mesh-bg {
       position: fixed; inset: 0;
       background-image: 
         radial-gradient(at 0% 0%, rgba(79, 172, 254, 0.18) 0px, transparent 50%),
         radial-gradient(at 100% 0%, rgba(157, 78, 221, 0.2) 0px, transparent 50%),
         radial-gradient(at 50% 100%, rgba(0, 242, 254, 0.14) 0px, transparent 50%);
-      filter: blur(55px);
+      filter: blur(60px);
       z-index: -3; pointer-events: none;
       animation: meshPulse 14s ease-in-out infinite alternate;
     }
@@ -110,11 +112,23 @@ html
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* LOGIN SCREEN */
+    /* PRIVACY LOCK SCREEN OVERLAY */
+    .privacy-lock-screen {
+      position: fixed; inset: 0; z-index: 5000;
+      background: rgba(3, 5, 9, 0.95); backdrop-filter: blur(45px);
+      display: none; justify-content: center; align-items: center; text-align: center;
+    }
+    .privacy-lock-box {
+      background: rgba(13, 20, 36, 0.7); border: 1px solid var(--accent);
+      padding: 40px; border-radius: 30px; box-shadow: 0 0 60px var(--accent-glow);
+      max-width: 420px; width: 90%;
+    }
+
+    /* ================= LOGIN SCREEN ================= */
     .login-container {
       position: fixed; inset: 0; z-index: 2000;
       display: flex; justify-content: center; align-items: center;
-      background: rgba(4, 6, 11, 0.92); backdrop-filter: blur(40px);
+      background: rgba(3, 5, 9, 0.94); backdrop-filter: blur(40px);
       transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); padding: 20px;
     }
     .login-container.hidden { opacity: 0; visibility: hidden; transform: scale(0.92) translateY(20px); }
@@ -168,13 +182,13 @@ html
     .btn-cyber:hover { transform: translateY(-2px); box-shadow: 0 18px 40px var(--accent-glow); }
 
     .btn-danger-cyber {
-      background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%);
+      background: var(--gradient-danger);
       color: white; border: none; border-radius: 14px; padding: 12px 20px;
       font-weight: 700; cursor: pointer; transition: 0.3s;
     }
     .btn-danger-cyber:hover { transform: translateY(-2px); box-shadow: 0 5px 20px rgba(239, 68, 68, 0.4); }
 
-    /* PORTAL VIEW */
+    /* ================= PORTAL VIEW ================= */
     .portal-view { display: flex; min-height: 100vh; opacity: 0; pointer-events: none; transition: 0.5s ease; }
     .portal-view.visible { opacity: 1; pointer-events: auto; }
 
@@ -196,9 +210,9 @@ html
 
     .nav-links { list-style: none; display: flex; flex-direction: column; gap: 4px; flex: 1; overflow-y: auto; }
     .nav-item a {
-      display: flex; align-items: center; gap: 12px; padding: 11px 14px;
+      display: flex; align-items: center; gap: 12px; padding: 10px 14px;
       border-radius: 14px; color: var(--text-muted); text-decoration: none;
-      font-weight: 600; font-size: 0.88rem; transition: 0.3s; cursor: pointer;
+      font-weight: 600; font-size: 0.86rem; transition: 0.3s; cursor: pointer;
     }
     .nav-item a:hover { background: rgba(255, 255, 255, 0.05); color: #fff; transform: translateX(4px); }
     .nav-item a.active { background: rgba(0, 242, 254, 0.12); color: var(--accent); border-left: 3px solid var(--accent); }
@@ -222,57 +236,66 @@ html
     .logout-btn { font-size: 0.72rem; color: #f87171; cursor: pointer; text-decoration: none; font-weight: 600; }
 
     /* MAIN CONTENT */
-    .main-content { flex: 1; margin-left: var(--sidebar-width); padding: 30px 40px; min-height: 100vh; overflow-y: auto; }
+    .main-content { flex: 1; margin-left: var(--sidebar-width); padding: 25px 35px; min-height: 100vh; overflow-y: auto; }
+
+    /* EXECUTIVE TICKER BAR */
+    .executive-ticker {
+      background: rgba(13, 20, 36, 0.6); border: 1px solid var(--glass-border);
+      border-radius: 16px; padding: 8px 18px; margin-bottom: 20px; display: flex;
+      align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--text-muted);
+    }
+    .ticker-pill { display: flex; align-items: center; gap: 6px; font-weight: 600; color: #fff; }
+    .ticker-dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 8px #34d399; }
 
     /* DUAL TIME-ZONE HERO */
     .dashboard-hero {
       display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 25px; flex-wrap: wrap; gap: 15px;
+      margin-bottom: 20px; flex-wrap: wrap; gap: 15px;
     }
     .hero-title h2 {
-      font-family: 'Space Grotesk', sans-serif; font-size: 2.3rem; font-weight: 700;
+      font-family: 'Space Grotesk', sans-serif; font-size: 2.2rem; font-weight: 700;
       background: var(--gradient-1); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
     }
     .hero-title p { color: var(--text-muted); font-size: 0.95rem; }
 
-    .dual-time-box { display: flex; gap: 12px; flex-wrap: wrap; }
+    .dual-time-box { display: flex; gap: 10px; flex-wrap: wrap; }
     .time-badge {
       background: rgba(13, 20, 36, 0.65); border: 1px solid var(--glass-border);
-      padding: 10px 16px; border-radius: 18px; backdrop-filter: blur(15px);
+      padding: 8px 14px; border-radius: 16px; backdrop-filter: blur(15px);
     }
-    .time-badge .tz-label { font-size: 0.72rem; color: var(--text-muted); font-weight: 700; }
-    .time-badge .tz-val { font-family: 'JetBrains Mono', monospace; font-size: 1.1rem; font-weight: 700; color: var(--accent); }
+    .time-badge .tz-label { font-size: 0.68rem; color: var(--text-muted); font-weight: 700; }
+    .time-badge .tz-val { font-family: 'JetBrains Mono', monospace; font-size: 1.05rem; font-weight: 700; color: var(--accent); }
 
     /* EXPORT PROGRESS METER */
     .target-meter-card {
       background: rgba(13, 20, 36, 0.5); border: 1px solid var(--glass-border);
-      border-radius: 22px; padding: 18px 24px; margin-bottom: 25px; backdrop-filter: blur(20px);
+      border-radius: 20px; padding: 16px 20px; margin-bottom: 22px; backdrop-filter: blur(20px);
       display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 15px;
     }
-    .meter-info h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
-    .meter-info p { font-size: 0.82rem; color: var(--text-muted); }
-    .meter-inputs { display: flex; align-items: center; gap: 12px; }
+    .meter-info h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 2px; }
+    .meter-info p { font-size: 0.78rem; color: var(--text-muted); }
+    .meter-inputs { display: flex; align-items: center; gap: 10px; }
     .meter-inputs input {
-      width: 110px; padding: 8px 12px; border-radius: 12px; background: rgba(0,0,0,0.4);
-      border: 1px solid var(--glass-border); color: #fff; font-family:'JetBrains Mono'; font-size: 0.9rem;
+      width: 105px; padding: 7px 10px; border-radius: 12px; background: rgba(0,0,0,0.4);
+      border: 1px solid var(--glass-border); color: #fff; font-family:'JetBrains Mono'; font-size: 0.85rem;
     }
-    .meter-progress-wrap { flex: 1; min-width: 200px; max-width: 320px; }
-    .meter-bar-bg { width: 100%; height: 10px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; }
+    .meter-progress-wrap { flex: 1; min-width: 180px; max-width: 300px; }
+    .meter-bar-bg { width: 100%; height: 8px; background: rgba(0,0,0,0.5); border-radius: 10px; overflow: hidden; }
     .meter-bar-fill { height: 100%; width: 0%; background: var(--gradient-aurora); transition: 0.4s; }
 
     /* PINNED SHORTCUTS */
-    .pinned-section { margin-bottom: 25px; display: none; }
+    .pinned-section { margin-bottom: 22px; display: none; }
     .pinned-section.has-pins { display: block; }
     .pinned-title {
-      font-size: 0.88rem; font-weight: 700; color: #fbbf24; text-transform: uppercase;
-      letter-spacing: 0.8px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px;
+      font-size: 0.85rem; font-weight: 700; color: #fbbf24; text-transform: uppercase;
+      letter-spacing: 0.8px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;
     }
     .pinned-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px;
     }
     .pinned-pill {
       background: rgba(251, 191, 36, 0.08); border: 1px solid rgba(251, 191, 36, 0.25);
-      border-radius: 16px; padding: 12px 16px; display: flex; align-items: center;
+      border-radius: 14px; padding: 10px 14px; display: flex; align-items: center;
       justify-content: space-between; text-decoration: none; color: #fff; transition: 0.3s;
     }
     .pinned-pill:hover { background: rgba(251, 191, 36, 0.15); transform: translateY(-2px); }
@@ -280,15 +303,15 @@ html
     /* EXTENDED EXPORT QUICK ACTIONS BANNER */
     .quick-actions-banner {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px; margin-bottom: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px; margin-bottom: 22px;
     }
     .action-widget-card {
       background: rgba(13, 20, 36, 0.5);
       border: 1px solid var(--glass-border);
-      border-radius: 18px;
-      padding: 14px 16px;
-      display: flex; align-items: center; gap: 12px;
+      border-radius: 16px;
+      padding: 12px 14px;
+      display: flex; align-items: center; gap: 10px;
       cursor: pointer; backdrop-filter: blur(15px); transition: all 0.3s;
     }
     .action-widget-card:hover {
@@ -296,82 +319,94 @@ html
       background: rgba(0, 242, 254, 0.08); box-shadow: 0 10px 25px -5px var(--accent-glow);
     }
     .action-icon-circle {
-      width: 40px; height: 40px; border-radius: 12px;
+      width: 36px; height: 36px; border-radius: 10px;
       background: rgba(255, 255, 255, 0.06); display: flex; align-items: center; justify-content: center;
-      font-size: 1.1rem; color: var(--accent); transition: 0.3s;
+      font-size: 1rem; color: var(--accent); transition: 0.3s;
     }
     .action-widget-card:hover .action-icon-circle { background: var(--gradient-1); color: #040813; }
-    .action-info h4 { font-size: 0.85rem; font-weight: 700; margin-bottom: 2px; }
-    .action-info span { font-size: 0.72rem; color: var(--text-muted); }
+    .action-info h4 { font-size: 0.82rem; font-weight: 700; margin-bottom: 2px; }
+    .action-info span { font-size: 0.68rem; color: var(--text-muted); }
 
     /* CATEGORY PILLS */
-    .category-pills-bar { display: flex; gap: 10px; margin-bottom: 20px; overflow-x: auto; padding-bottom: 6px; }
+    .category-pills-bar { display: flex; gap: 8px; margin-bottom: 18px; overflow-x: auto; padding-bottom: 6px; }
     .cat-pill-btn {
-      padding: 8px 18px; background: rgba(13, 20, 36, 0.5); border: 1px solid var(--glass-border);
-      border-radius: 25px; color: var(--text-muted); font-size: 0.85rem; font-weight: 600;
+      padding: 7px 16px; background: rgba(13, 20, 36, 0.5); border: 1px solid var(--glass-border);
+      border-radius: 20px; color: var(--text-muted); font-size: 0.82rem; font-weight: 600;
       cursor: pointer; white-space: nowrap; transition: 0.3s;
     }
     .cat-pill-btn:hover { color: #fff; background: rgba(255,255,255,0.08); }
     .cat-pill-btn.active { background: var(--gradient-1); color: #040813; border-color: transparent; }
 
-    /* SEARCH TOOLBAR WITH SPOTLIGHT SHORTCUT */
+    /* SEARCH TOOLBAR WITH VOICE BUTTON */
     .toolbar-cyber {
-      display: flex; gap: 15px; margin-bottom: 30px;
-      background: rgba(13, 20, 36, 0.45); padding: 10px; border-radius: 18px;
-      border: 1px solid var(--glass-border); backdrop-filter: blur(20px);
+      display: flex; gap: 10px; margin-bottom: 25px;
+      background: rgba(13, 20, 36, 0.45); padding: 8px 12px; border-radius: 16px;
+      border: 1px solid var(--glass-border); backdrop-filter: blur(20px); align-items: center;
     }
     .search-box-cyber { flex: 1; position: relative; }
-    .search-box-cyber i { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
+    .search-box-cyber i { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: var(--text-muted); }
     .search-box-cyber input {
-      width: 100%; padding: 14px 20px 14px 50px; background: rgba(0, 0, 0, 0.3);
-      border: 1px solid transparent; border-radius: 14px; color: #fff; font-size: 0.98rem; outline: none; transition: 0.3s;
+      width: 100%; padding: 12px 18px 12px 46px; background: rgba(0, 0, 0, 0.3);
+      border: 1px solid transparent; border-radius: 12px; color: #fff; font-size: 0.95rem; outline: none; transition: 0.3s;
     }
     .search-box-cyber input:focus { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow); }
-    .kbd-shortcut {
-      position: absolute; right: 15px; top: 50%; transform: translateY(-50%);
-      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15);
-      border-radius: 8px; padding: 4px 8px; font-size: 0.72rem; color: var(--text-muted); font-family: 'JetBrains Mono';
+    
+    .voice-btn-mic {
+      background: rgba(0, 242, 254, 0.12); border: 1px solid var(--accent);
+      color: var(--accent); width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s;
     }
+    .voice-btn-mic:hover { background: var(--accent); color: #040813; }
+    .voice-btn-mic.listening { animation: pulseGlow 1s infinite alternate; background: #ef4444; color: #fff; border-color: #ef4444; }
+
+    @keyframes pulseGlow { 0% { transform: scale(1); } 100% { transform: scale(1.1); box-shadow: 0 0 20px #ef4444; } }
+
+    .lock-screen-quickbtn {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid var(--glass-border);
+      color: var(--text-muted); width: 42px; height: 42px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; transition: 0.3s;
+    }
+    .lock-screen-quickbtn:hover { color: #f87171; border-color: #f87171; }
 
     /* GRID & CARDS */
     .grid-container {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 22px; padding-bottom: 60px;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+      gap: 20px; padding-bottom: 60px;
     }
     .tool-card {
       position: relative; background: rgba(13, 20, 36, 0.55);
-      border: 1px solid var(--glass-border); border-radius: 22px;
-      padding: 24px; text-decoration: none; color: #fff;
+      border: 1px solid var(--glass-border); border-radius: 20px;
+      padding: 22px; text-decoration: none; color: #fff;
       display: flex; flex-direction: column; justify-content: space-between;
-      min-height: 190px; backdrop-filter: blur(20px); transition: all 0.3s;
+      min-height: 185px; backdrop-filter: blur(20px); transition: all 0.3s;
     }
     .tool-card:hover {
       border-color: var(--glass-border-hover);
       box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.8), 0 0 30px var(--accent-glow);
       transform: translateY(-5px);
     }
-    .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px; }
+    .card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
     .card-icon-wrap {
-      width: 50px; height: 50px; border-radius: 15px;
+      width: 48px; height: 48px; border-radius: 14px;
       background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
       display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; color: var(--accent); transition: 0.3s;
+      font-size: 1.35rem; color: var(--accent); transition: 0.3s;
     }
     .tool-card:hover .card-icon-wrap { background: var(--gradient-1); color: #040813; transform: scale(1.06); }
     
     .card-actions-top { display: flex; align-items: center; gap: 8px; }
-    .star-btn { color: var(--text-muted); font-size: 1.1rem; cursor: pointer; transition: 0.2s; }
+    .star-btn { color: var(--text-muted); font-size: 1rem; cursor: pointer; transition: 0.2s; }
     .star-btn.starred { color: #fbbf24; filter: drop-shadow(0 0 8px #fbbf24); }
-    .copy-btn-card { color: var(--text-muted); font-size: 0.9rem; cursor: pointer; transition: 0.2s; }
+    .copy-btn-card { color: var(--text-muted); font-size: 0.85rem; cursor: pointer; transition: 0.2s; }
     .copy-btn-card:hover { color: var(--accent); }
 
     .card-tag {
-      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
-      padding: 4px 10px; border-radius: 20px; background: rgba(255, 255, 255, 0.06);
+      font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+      padding: 4px 9px; border-radius: 18px; background: rgba(255, 255, 255, 0.06);
       border: 1px solid rgba(255, 255, 255, 0.08); color: var(--text-muted);
     }
-    .card-title { font-size: 1.12rem; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
-    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 12px; color: var(--accent); font-size: 0.82rem; font-weight: 600; }
+    .card-title { font-size: 1.08rem; font-weight: 700; line-height: 1.35; margin-bottom: 6px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 10px; color: var(--accent); font-size: 0.8rem; font-weight: 600; }
 
     /* SPOTLIGHT */
     .spotlight-overlay {
@@ -405,24 +440,24 @@ html
     }
     .modal-content {
       background: rgba(13, 20, 36, 0.92); border: 1px solid rgba(255, 255, 255, 0.15);
-      max-width: 680px; margin: 40px auto; padding: 32px; border-radius: 26px;
+      max-width: 680px; margin: 35px auto; padding: 30px; border-radius: 24px;
       box-shadow: 0 40px 90px rgba(0,0,0,0.9); animation: modalPop 0.3s ease;
     }
     @keyframes modalPop { from { transform: scale(0.94); opacity: 0; } to { transform: scale(1); opacity: 1; } }
     .modal-header {
       display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 20px; border-bottom: 1px solid var(--glass-border); padding-bottom: 14px;
+      margin-bottom: 18px; border-bottom: 1px solid var(--glass-border); padding-bottom: 12px;
     }
-    .modal-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.45rem; }
+    .modal-header h2 { font-family: 'Space Grotesk', sans-serif; font-size: 1.4rem; }
     .close-btn { font-size: 1.8rem; cursor: pointer; color: var(--text-muted); }
     .close-btn:hover { color: #f87171; }
 
-    .form-group-cyber { margin-bottom: 16px; }
-    .form-group-cyber label { display: block; font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px; }
+    .form-group-cyber { margin-bottom: 15px; }
+    .form-group-cyber label { display: block; font-size: 0.82rem; color: var(--text-muted); margin-bottom: 5px; }
     .form-group-cyber input, .form-group-cyber select {
-      width: 100%; padding: 13px 16px; background: rgba(0, 0, 0, 0.4);
-      border: 1px solid var(--glass-border); border-radius: 14px; color: #fff;
-      font-size: 0.95rem; outline: none; font-family: inherit;
+      width: 100%; padding: 12px 15px; background: rgba(0, 0, 0, 0.4);
+      border: 1px solid var(--glass-border); border-radius: 12px; color: #fff;
+      font-size: 0.92rem; outline: none; font-family: inherit;
     }
     .form-group-cyber input:focus, .form-group-cyber select:focus { border-color: var(--accent); }
 
@@ -436,10 +471,10 @@ html
 
     .settings-row {
       display: flex; justify-content: space-between; align-items: center;
-      padding: 14px 0; border-bottom: 1px solid var(--glass-border);
+      padding: 12px 0; border-bottom: 1px solid var(--glass-border);
     }
-    .settings-row-text h4 { font-size: 0.95rem; margin-bottom: 2px; }
-    .settings-row-text p { font-size: 0.8rem; color: var(--text-muted); }
+    .settings-row-text h4 { font-size: 0.9rem; margin-bottom: 2px; }
+    .settings-row-text p { font-size: 0.78rem; color: var(--text-muted); }
 
     .calc-screen {
       width: 100%; background: #000; color: var(--accent); font-family: 'JetBrains Mono', monospace;
@@ -473,7 +508,7 @@ html
     @media (max-width: 992px) {
       .sidebar { left: -100%; }
       .sidebar.open { left: 0; box-shadow: 50px 0 100px rgba(0,0,0,0.9); }
-      .main-content { margin-left: 0; padding: 25px 20px; }
+      .main-content { margin-left: 0; padding: 20px 15px; }
       .user-mgmt-layout { grid-template-columns: 1fr; }
       #menuToggle { display: block !important; }
     }
@@ -489,6 +524,17 @@ html
   <div id="background-glow"></div>
   <div class="overlay" id="overlay"></div>
   <div id="preloader"><div class="loader-ring"></div></div>
+
+  <!-- PRIVACY LOCK SCREEN -->
+  <div class="privacy-lock-screen" id="privacyLockScreen">
+    <div class="privacy-lock-box">
+      <i class="fas fa-user-shield" style="font-size:3rem; color:var(--accent); margin-bottom:15px;"></i>
+      <h2 style="font-family:'Space Grotesk'; font-size:1.6rem; margin-bottom:6px;">Workspace Locked</h2>
+      <p style="color:var(--text-muted); font-size:0.85rem; margin-bottom:20px;">Enter PIN or click unlock to resume Amit's Session</p>
+      <input type="password" id="unlockPassInput" placeholder="Password or PIN" style="width:100%; padding:14px; border-radius:14px; background:rgba(0,0,0,0.5); border:1px solid var(--accent); color:#fff; text-align:center; font-size:1.1rem; margin-bottom:15px; outline:none;">
+      <button class="btn-cyber" onclick="unlockPrivacyScreen()"><i class="fas fa-lock-open"></i> UNLOCK COCKPIT</button>
+    </div>
+  </div>
 
   <!-- COMMAND PALETTE (CTRL+K) -->
   <div class="spotlight-overlay" id="spotlightOverlay">
@@ -534,11 +580,13 @@ html
     <nav class="sidebar" id="sidebar">
       <div class="brand-logo">
         <div class="brand-icon-wrap"><i class="fas fa-cubes"></i></div>
-        <span id="sidebarPortalName">Amit Chaudhary</span>
+        <span id="sidebarPortalName">Command Center</span>
       </div>
 
       <ul class="nav-links">
         <li class="nav-item"><a id="dashboardLink" class="active"><i class="fas fa-shapes"></i> Dashboard</a></li>
+        <li class="nav-item"><a id="openContOptBtnSidebar"><i class="fas fa-truck-container"></i> Container Optimizer</a></li>
+        <li class="nav-item"><a id="openShrinkBtnSidebar"><i class="fas fa-ruler-combined"></i> Fabric Shrinkage</a></li>
         <li class="nav-item"><a id="openVolBtnSidebar"><i class="fas fa-plane-departure"></i> Air/Sea Vol. Wt</a></li>
         <li class="nav-item"><a id="openFobBtnSidebar"><i class="fas fa-file-invoice-dollar"></i> FOB/CIF Quoting</a></li>
         <li class="nav-item"><a id="openCutBtnSidebar"><i class="fas fa-scissors"></i> Cut-to-Ship %</a></li>
@@ -577,6 +625,12 @@ html
 
     <!-- Main Content -->
     <main class="main-content">
+      <!-- EXECUTIVE TICKER -->
+      <div class="executive-ticker">
+        <div class="ticker-pill"><div class="ticker-dot"></div> Radnik Hubs: Noida C-16 | GGN 186 | Hong Kong | Quince US</div>
+        <div class="ticker-pill"><i class="fas fa-microphone" style="color:var(--accent);"></i> Voice AI: Ready (Click Mic)</div>
+      </div>
+
       <!-- DUAL TIME HERO -->
       <div class="dashboard-hero">
         <div style="display: flex; align-items: center;">
@@ -622,8 +676,24 @@ html
         <div class="pinned-grid" id="pinnedGridContainer"></div>
       </div>
 
-      <!-- 12 WORKING ACTION WIDGET BUTTONS (FULL EXPORT SUITE) -->
+      <!-- 14 ACTION WIDGETS BANNER -->
       <div class="quick-actions-banner">
+        <div class="action-widget-card" id="btnActionContOpt">
+          <div class="action-icon-circle"><i class="fas fa-truck-container"></i></div>
+          <div class="action-info">
+            <h4>Container Load</h4>
+            <span>20/40ft Optimizer</span>
+          </div>
+        </div>
+
+        <div class="action-widget-card" id="btnActionShrink">
+          <div class="action-icon-circle"><i class="fas fa-ruler-combined"></i></div>
+          <div class="action-info">
+            <h4>Shrinkage %</h4>
+            <span>Pattern Tolerance</span>
+          </div>
+        </div>
+
         <div class="action-widget-card" id="btnActionVol">
           <div class="action-icon-circle"><i class="fas fa-plane-departure"></i></div>
           <div class="action-info">
@@ -724,13 +794,14 @@ html
       <!-- Category Filter Pills -->
       <div class="category-pills-bar" id="categoryPillsContainer"></div>
 
-      <!-- Search Toolbar -->
+      <!-- Search Toolbar with AI Mic & Lock -->
       <div class="toolbar-cyber">
         <div class="search-box-cyber">
           <i class="fas fa-search"></i>
           <input type="text" id="searchInput" placeholder="Search operational sheets, logs, Quince, finance...">
-          <div class="kbd-shortcut">Ctrl + K</div>
         </div>
+        <button class="voice-btn-mic" id="voiceBtn" title="Click & Speak (e.g. 'Open Daily Sale', 'Open Calc')"><i class="fas fa-microphone"></i></button>
+        <button class="lock-screen-quickbtn" onclick="lockPrivacyScreen()" title="Privacy Screen Lock (Ctrl + L)"><i class="fas fa-shield-halved"></i></button>
       </div>
 
       <!-- Grid Cards -->
@@ -738,9 +809,62 @@ html
     </main>
   </div>
 
-  <!-- ================= 12 WORKING OPERATIONAL MODALS ================= -->
+  <!-- ================= 14 WORKING OPERATIONAL MODALS ================= -->
 
-  <!-- 1. AIR/SEA VOLUMETRIC CHARGEABLE WEIGHT CALCULATOR -->
+  <!-- CONTAINER LOAD OPTIMIZER MODAL -->
+  <div id="contOptModal" class="modal">
+    <div class="modal-content" style="max-width: 620px;">
+      <div class="modal-header">
+        <h2><i class="fas fa-truck-container" style="color:var(--accent);"></i> 20FT / 40FT / 40HC Container Load Optimizer</h2>
+        <span class="close-btn">&times;</span>
+      </div>
+      <div style="margin-bottom:15px;">
+        <label style="font-size:0.85rem; color:var(--text-muted);">Enter Total Shipment CBM (m³):</label>
+        <input type="number" id="contTotalCbmInput" value="58.5" step="0.1" style="padding:12px; border-radius:12px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:#fff; width:100%; font-size:1.1rem; font-family:'JetBrains Mono';">
+      </div>
+      <div style="display:flex; flex-direction:column; gap:10px;" id="containerAnalysisBox"></div>
+    </div>
+  </div>
+
+  <!-- FABRIC SHRINKAGE CALCULATOR MODAL -->
+  <div id="shrinkModal" class="modal">
+    <div class="modal-content" style="max-width: 550px;">
+      <div class="modal-header">
+        <h2><i class="fas fa-ruler-combined" style="color:var(--accent);"></i> Fabric Shrinkage & Pattern Calc</h2>
+        <span class="close-btn">&times;</span>
+      </div>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px; margin-bottom:15px;">
+        <div>
+          <label style="font-size:0.8rem; color:var(--text-muted);">Length Shrinkage (%)</label>
+          <input type="number" id="shrinkL" value="4.5" step="0.1" style="padding:10px; border-radius:10px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:#fff; width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.8rem; color:var(--text-muted);">Width Shrinkage (%)</label>
+          <input type="number" id="shrinkW" value="3.0" step="0.1" style="padding:10px; border-radius:10px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:#fff; width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.8rem; color:var(--text-muted);">Target Garment Length (cm)</label>
+          <input type="number" id="garmentL" value="90" style="padding:10px; border-radius:10px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:#fff; width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.8rem; color:var(--text-muted);">Target Garment Chest (cm)</label>
+          <input type="number" id="garmentW" value="52" style="padding:10px; border-radius:10px; background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); color:#fff; width:100%;">
+        </div>
+      </div>
+      <div style="background:rgba(0,0,0,0.5); padding:18px; border-radius:16px; border:1px solid var(--glass-border); display:grid; grid-template-columns:1fr 1fr; gap:12px; text-align:center;">
+        <div>
+          <div style="font-size:0.8rem; color:var(--text-muted);">Cut Pattern Length Needed</div>
+          <div id="cutPatternLResult" style="font-size:1.6rem; font-family:'JetBrains Mono'; font-weight:700; color:var(--accent);">94.2 cm</div>
+        </div>
+        <div>
+          <div style="font-size:0.8rem; color:var(--text-muted);">Cut Pattern Chest Needed</div>
+          <div id="cutPatternWResult" style="font-size:1.6rem; font-family:'JetBrains Mono'; font-weight:700; color:#34d399;">53.6 cm</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- AIR/SEA VOLUMETRIC WEIGHT CALCULATOR -->
   <div id="volModal" class="modal">
     <div class="modal-content" style="max-width: 600px;">
       <div class="modal-header">
@@ -784,7 +908,7 @@ html
     </div>
   </div>
 
-  <!-- 2. FOB & CIF PRICE QUOTING CALCULATOR -->
+  <!-- FOB & CIF PRICE QUOTING CALCULATOR -->
   <div id="fobModal" class="modal">
     <div class="modal-content" style="max-width: 600px;">
       <div class="modal-header">
@@ -822,7 +946,7 @@ html
     </div>
   </div>
 
-  <!-- 3. CUT-TO-SHIP RATIO & EFFICIENCY CALCULATOR -->
+  <!-- CUT-TO-SHIP RATIO CALCULATOR -->
   <div id="cutModal" class="modal">
     <div class="modal-content" style="max-width: 550px;">
       <div class="modal-header">
@@ -856,7 +980,7 @@ html
     </div>
   </div>
 
-  <!-- 4. APPAREL HS CODE & DUTY DRAWBACK LOOKUP -->
+  <!-- APPAREL HS CODE LOOKUP -->
   <div id="hsModal" class="modal">
     <div class="modal-content" style="max-width: 600px;">
       <div class="modal-header">
@@ -870,7 +994,7 @@ html
     </div>
   </div>
 
-  <!-- 5. CBM VOLUME MODAL -->
+  <!-- CBM VOLUME MODAL -->
   <div id="cbmModal" class="modal">
     <div class="modal-content" style="max-width: 580px;">
       <div class="modal-header">
@@ -908,7 +1032,7 @@ html
     </div>
   </div>
 
-  <!-- 6. DISPATCH NOTE GENERATOR MODAL -->
+  <!-- DISPATCH NOTE GENERATOR MODAL -->
   <div id="dispatchModal" class="modal">
     <div class="modal-content" style="max-width: 620px;">
       <div class="modal-header">
@@ -929,7 +1053,7 @@ html
     </div>
   </div>
 
-  <!-- 7. FABRIC GSM CALCULATOR MODAL -->
+  <!-- FABRIC GSM CALCULATOR MODAL -->
   <div id="fabricModal" class="modal">
     <div class="modal-content" style="max-width: 520px;">
       <div class="modal-header">
@@ -957,7 +1081,7 @@ html
     </div>
   </div>
 
-  <!-- 8. USER MANAGEMENT MODAL -->
+  <!-- USER MANAGEMENT MODAL -->
   <div id="userManagementModal" class="modal">
     <div class="modal-content" style="max-width: 720px;">
       <div class="modal-header">
@@ -1000,7 +1124,7 @@ html
     </div>
   </div>
 
-  <!-- 9. PORTAL SETTINGS MODAL -->
+  <!-- PORTAL SETTINGS MODAL -->
   <div id="portalSettingsModal" class="modal">
     <div class="modal-content" style="max-width: 650px;">
       <div class="modal-header">
@@ -1052,7 +1176,7 @@ html
     </div>
   </div>
 
-  <!-- 10. TASK CHECKLIST MODAL -->
+  <!-- TASK CHECKLIST MODAL -->
   <div id="tasksModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
@@ -1067,7 +1191,7 @@ html
     </div>
   </div>
 
-  <!-- 11. CALCULATOR MODAL -->
+  <!-- CALCULATOR MODAL -->
   <div id="calcModal" class="modal">
     <div class="modal-content" style="max-width: 400px;">
       <div class="modal-header">
@@ -1098,7 +1222,7 @@ html
     </div>
   </div>
 
-  <!-- 12. CURRENCY CONVERTER MODAL -->
+  <!-- CURRENCY CONVERTER MODAL -->
   <div id="currencyModal" class="modal">
     <div class="modal-content" style="max-width: 480px;">
       <div class="modal-header">
@@ -1315,6 +1439,8 @@ html
       loadTasks();
       loadTargetProgress();
       renderHsList();
+      calculateContainerFit();
+      calculateShrinkage();
 
       const saved = sessionStorage.getItem('currentUser');
       if (saved) {
@@ -1342,6 +1468,17 @@ html
         passToggle.classList.toggle('fa-eye-slash', isPass);
       });
 
+      // Quick Lock Mode (Ctrl + L)
+      window.addEventListener('keydown', e => {
+        if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'l') {
+          e.preventDefault();
+          lockPrivacyScreen();
+        }
+      });
+
+      // AI Voice Command Button
+      document.getElementById('voiceBtn').addEventListener('click', startVoiceAssistant);
+
       // Spotlight Search (Ctrl + K)
       window.addEventListener('keydown', e => {
         if((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
@@ -1360,6 +1497,11 @@ html
         const el = document.getElementById(btnId);
         if(el) el.addEventListener('click', () => { playCyberSound(700); openModal(modalId); closeSidebar(); });
       };
+      bindModal('btnActionContOpt', 'contOptModal');
+      bindModal('openContOptBtnSidebar', 'contOptModal');
+      bindModal('btnActionShrink', 'shrinkModal');
+      bindModal('openShrinkBtnSidebar', 'shrinkModal');
+
       bindModal('btnActionVol', 'volModal');
       bindModal('openVolBtnSidebar', 'volModal');
       bindModal('btnActionFob', 'fobModal');
@@ -1390,6 +1532,10 @@ html
       bindModal('portalSettingsBtnSidebar', 'portalSettingsModal');
 
       // Auto Calc Listeners
+      document.getElementById('contTotalCbmInput').addEventListener('input', calculateContainerFit);
+      ['shrinkL', 'shrinkW', 'garmentL', 'garmentW'].forEach(id => {
+        document.getElementById(id).addEventListener('input', calculateShrinkage);
+      });
       ['volL', 'volW', 'volH', 'volCtns', 'volActualKg'].forEach(id => {
         document.getElementById(id).addEventListener('input', calculateVolumetric);
       });
@@ -1454,7 +1600,101 @@ html
       });
     }
 
-    /* 1. VOLUMETRIC WEIGHT LOGIC */
+    /* PRIVACY LOCK SCREEN */
+    function lockPrivacyScreen() {
+      document.getElementById('privacyLockScreen').style.display = 'flex';
+      document.getElementById('unlockPassInput').value = '';
+      document.getElementById('unlockPassInput').focus();
+      playCyberSound(400);
+    }
+    function unlockPrivacyScreen() {
+      const p = document.getElementById('unlockPassInput').value.trim();
+      if(!p || p === 'aminehu@123' || p === '1234' || (currentUser && p === currentUser.username)) {
+        document.getElementById('privacyLockScreen').style.display = 'none';
+        playCyberSound(900);
+      } else {
+        alert('Access Denied. Enter valid password or username.');
+      }
+    }
+
+    /* AI VOICE COMMAND ASSISTANT */
+    function startVoiceAssistant() {
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if(!SpeechRecognition) {
+        return alert('Voice Recognition is supported on Chrome/Edge browsers. Please open in Chrome.');
+      }
+      const micBtn = document.getElementById('voiceBtn');
+      const rec = new SpeechRecognition();
+      rec.lang = 'en-US';
+      rec.start();
+      micBtn.classList.add('listening');
+
+      rec.onresult = (e) => {
+        const transcript = e.results[0][0].transcript.toLowerCase().trim();
+        micBtn.classList.remove('listening');
+
+        if(transcript.includes('sale') || transcript.includes('daily sale')) {
+          window.open('https://radnikexports1-my.sharepoint.com/:x:/r/personal/amit_chaudhary_radnikexports1_onmicrosoft_com/_layouts/15/Doc.aspx?sourcedoc=%7B5DE750E6-1A38-4B42-B02D-44A3D95B2D14%7D&file=Book%206.xlsx&action=editnew', '_blank');
+        } else if(transcript.includes('calc') || transcript.includes('calculator')) {
+          openModal('calcModal');
+        } else if(transcript.includes('task') || transcript.includes('checklist')) {
+          openModal('tasksModal');
+        } else if(transcript.includes('cbm') || transcript.includes('volume')) {
+          openModal('cbmModal');
+        } else if(transcript.includes('container')) {
+          openModal('contOptModal');
+        } else {
+          document.getElementById('searchInput').value = transcript;
+          filterButtons();
+        }
+      };
+      rec.onerror = () => micBtn.classList.remove('listening');
+      rec.onend = () => micBtn.classList.remove('listening');
+    }
+
+    /* 1. CONTAINER LOAD OPTIMIZER */
+    function calculateContainerFit() {
+      const cbm = parseFloat(document.getElementById('contTotalCbmInput').value) || 0;
+      const box = document.getElementById('containerAnalysisBox');
+      const containers = [
+        { name: "20FT Standard Container", max: 33, color: "#00f2fe" },
+        { name: "40FT Standard Container", max: 67, color: "#34d399" },
+        { name: "40FT High Cube (HC) Container", max: 76, color: "#a78bfa" }
+      ];
+      box.innerHTML = '';
+      containers.forEach(c => {
+        const count = Math.ceil(cbm / c.max) || 1;
+        const fill = Math.min(100, Math.round((cbm / (count * c.max)) * 100));
+        const div = document.createElement('div');
+        div.style = "background:rgba(0,0,0,0.4); border:1px solid var(--glass-border); padding:12px; border-radius:12px;";
+        div.innerHTML = `
+          <div style="display:flex; justify-content:space-between; font-size:0.85rem; font-weight:700; margin-bottom:6px;">
+            <span>${c.name} (${c.max} CBM Max)</span>
+            <span style="color:${c.color};">${count} Box(es) Needed (${fill}% Full)</span>
+          </div>
+          <div style="height:6px; background:rgba(255,255,255,0.05); border-radius:6px; overflow:hidden;">
+            <div style="width:${fill}%; height:100%; background:${c.color};"></div>
+          </div>
+        `;
+        box.appendChild(div);
+      });
+    }
+
+    /* 2. FABRIC SHRINKAGE LOGIC */
+    function calculateShrinkage() {
+      const sL = parseFloat(document.getElementById('shrinkL').value) || 0;
+      const sW = parseFloat(document.getElementById('shrinkW').value) || 0;
+      const gL = parseFloat(document.getElementById('garmentL').value) || 0;
+      const gW = parseFloat(document.getElementById('garmentW').value) || 0;
+
+      const pL = gL / (1 - sL / 100);
+      const pW = gW / (1 - sW / 100);
+
+      document.getElementById('cutPatternLResult').textContent = pL.toFixed(1) + ' cm';
+      document.getElementById('cutPatternWResult').textContent = pW.toFixed(1) + ' cm';
+    }
+
+    /* 3. VOLUMETRIC WEIGHT LOGIC */
     function calculateVolumetric() {
       const l = parseFloat(document.getElementById('volL').value) || 0;
       const w = parseFloat(document.getElementById('volW').value) || 0;
@@ -1470,7 +1710,7 @@ html
       document.getElementById('chargeableResult').textContent = chargeable.toFixed(1) + ' Kg';
     }
 
-    /* 2. FOB / CIF PRICING LOGIC */
+    /* 4. FOB / CIF PRICING LOGIC */
     function calculateFobCif() {
       const ex = parseFloat(document.getElementById('fobExFact').value) || 0;
       const port = parseFloat(document.getElementById('fobPort').value) || 0;
@@ -1486,7 +1726,7 @@ html
       document.getElementById('cifFinalResult').textContent = `$ ${cifUsd.toFixed(2)} / Pc`;
     }
 
-    /* 3. CUT-TO-SHIP EFFICIENCY LOGIC */
+    /* 5. CUT-TO-SHIP EFFICIENCY LOGIC */
     function calculateCutToShip() {
       const ord = parseFloat(document.getElementById('cutOrder').value) || 1;
       const cut = parseFloat(document.getElementById('cutTotal').value) || 1;
@@ -1499,7 +1739,7 @@ html
       document.getElementById('cutBalanceResult').textContent = (bal >= 0 ? '+' : '') + bal + ' Pcs';
     }
 
-    /* 4. HS CODE LOOKUP */
+    /* 6. HS CODE LOOKUP */
     function renderHsList(list = HS_DATABASE) {
       const cont = document.getElementById('hsResultsList');
       cont.innerHTML = '';
@@ -1525,7 +1765,7 @@ html
       renderHsList(filtered);
     }
 
-    /* 5. CBM CALC */
+    /* 7. CBM CALC */
     function calculateCBM() {
       const l = parseFloat(document.getElementById('cbmL').value) || 0;
       const w = parseFloat(document.getElementById('cbmW').value) || 0;
@@ -1537,7 +1777,7 @@ html
       document.getElementById('cftTotalResult').textContent = cft.toFixed(2) + ' CFT';
     }
 
-    /* 6. DISPATCH NOTE */
+    /* 8. DISPATCH NOTE */
     function generateDispatchNote() {
       const inv = document.getElementById('dispInv').value.trim() || 'QN-EXP-01';
       const buyer = document.getElementById('dispBuyer').value.trim() || 'Quince USA';
@@ -1556,7 +1796,7 @@ html
       alert('Dispatch Summary copied! Ready to paste in WhatsApp/Email.');
     }
 
-    /* 7. FABRIC GSM */
+    /* 9. FABRIC GSM */
     function calculateFabric() {
       const gsm = parseFloat(document.getElementById('fabGsm').value) || 0;
       const width = parseFloat(document.getElementById('fabWidth').value) || 0;
